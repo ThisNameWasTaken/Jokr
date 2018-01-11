@@ -1,0 +1,7 @@
+@import '../_variables.scss';
+
+.container {
+    margin: auto;
+    max-width: 80rem;
+    padding: $grid-phone-gutter;
+}
