@@ -113,3 +113,13 @@
   right: 16px;
   top: 16px;
 }
+
+.mdl-card--joke>.mdl-card__actions {
+    display: flex;
+    box-sizing: border-box;
+    align-items: center;
+}
+
+.mdl-card--joke>.mdl-card__actions {
+    padding-right: 16px;
+}
