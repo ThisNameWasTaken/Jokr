@@ -60,92 +60,11 @@
 /******/ 	__webpack_require__.p = "";
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 0);
+/******/ 	return __webpack_require__(__webpack_require__.s = 2);
 /******/ })
 /************************************************************************/
 /******/ ([
 /* 0 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-var _mdlComponentHandler = __webpack_require__(1);
-
-var _mdlComponentHandler2 = _interopRequireDefault(_mdlComponentHandler);
-
-var _button = __webpack_require__(2);
-
-var _button2 = _interopRequireDefault(_button);
-
-var _checkbox = __webpack_require__(4);
-
-var _checkbox2 = _interopRequireDefault(_checkbox);
-
-var _dataTable = __webpack_require__(5);
-
-var _dataTable2 = _interopRequireDefault(_dataTable);
-
-var _iconToggle = __webpack_require__(6);
-
-var _iconToggle2 = _interopRequireDefault(_iconToggle);
-
-var _layout = __webpack_require__(7);
-
-var _layout2 = _interopRequireDefault(_layout);
-
-var _menu = __webpack_require__(8);
-
-var _menu2 = _interopRequireDefault(_menu);
-
-var _progress = __webpack_require__(9);
-
-var _progress2 = _interopRequireDefault(_progress);
-
-var _radio = __webpack_require__(10);
-
-var _radio2 = _interopRequireDefault(_radio);
-
-var _ripple = __webpack_require__(3);
-
-var _ripple2 = _interopRequireDefault(_ripple);
-
-var _slider = __webpack_require__(11);
-
-var _slider2 = _interopRequireDefault(_slider);
-
-var _snackbar = __webpack_require__(12);
-
-var _snackbar2 = _interopRequireDefault(_snackbar);
-
-var _spinner = __webpack_require__(13);
-
-var _spinner2 = _interopRequireDefault(_spinner);
-
-var _switch = __webpack_require__(14);
-
-var _switch2 = _interopRequireDefault(_switch);
-
-var _tabs = __webpack_require__(15);
-
-var _tabs2 = _interopRequireDefault(_tabs);
-
-var _textfield = __webpack_require__(16);
-
-var _textfield2 = _interopRequireDefault(_textfield);
-
-var _rAF = __webpack_require__(17);
-
-var _rAF2 = _interopRequireDefault(_rAF);
-
-var _tooltip = __webpack_require__(18);
-
-var _tooltip2 = _interopRequireDefault(_tooltip);
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-/***/ }),
-/* 1 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -653,7 +572,121 @@ window.addEventListener('load', function () {
 exports.default = componentHandler;
 
 /***/ }),
+/* 1 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+    value: true
+});
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+var Joke =
+/**
+ * @param {string} id 
+ * @param {string} text
+ * @param {string} title
+ * @param {number} votes 
+ */
+function Joke(id, title, text, votes) {
+    _classCallCheck(this, Joke);
+
+    this.id = id;
+    this.title = title;
+    this.text = text;
+    this.votes = votes;
+};
+
+exports.default = Joke;
+
+/***/ }),
 /* 2 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+var _mdlComponentHandler = __webpack_require__(0);
+
+var _mdlComponentHandler2 = _interopRequireDefault(_mdlComponentHandler);
+
+var _button = __webpack_require__(3);
+
+var _button2 = _interopRequireDefault(_button);
+
+var _checkbox = __webpack_require__(4);
+
+var _checkbox2 = _interopRequireDefault(_checkbox);
+
+var _dataTable = __webpack_require__(5);
+
+var _dataTable2 = _interopRequireDefault(_dataTable);
+
+var _iconToggle = __webpack_require__(6);
+
+var _iconToggle2 = _interopRequireDefault(_iconToggle);
+
+var _layout = __webpack_require__(7);
+
+var _layout2 = _interopRequireDefault(_layout);
+
+var _menu = __webpack_require__(8);
+
+var _menu2 = _interopRequireDefault(_menu);
+
+var _progress = __webpack_require__(9);
+
+var _progress2 = _interopRequireDefault(_progress);
+
+var _radio = __webpack_require__(10);
+
+var _radio2 = _interopRequireDefault(_radio);
+
+var _ripple = __webpack_require__(11);
+
+var _ripple2 = _interopRequireDefault(_ripple);
+
+var _slider = __webpack_require__(12);
+
+var _slider2 = _interopRequireDefault(_slider);
+
+var _snackbar = __webpack_require__(13);
+
+var _snackbar2 = _interopRequireDefault(_snackbar);
+
+var _spinner = __webpack_require__(14);
+
+var _spinner2 = _interopRequireDefault(_spinner);
+
+var _switch = __webpack_require__(15);
+
+var _switch2 = _interopRequireDefault(_switch);
+
+var _tabs = __webpack_require__(16);
+
+var _tabs2 = _interopRequireDefault(_tabs);
+
+var _textfield = __webpack_require__(17);
+
+var _textfield2 = _interopRequireDefault(_textfield);
+
+var _rAF = __webpack_require__(18);
+
+var _rAF2 = _interopRequireDefault(_rAF);
+
+var _tooltip = __webpack_require__(19);
+
+var _tooltip2 = _interopRequireDefault(_tooltip);
+
+__webpack_require__(20);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+/***/ }),
+/* 3 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -788,273 +821,6 @@ Object.defineProperty(exports, "__esModule", {
 })();
 
 exports.default = MaterialButton;
-
-/***/ }),
-/* 3 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-/**
- * @license
- * Copyright 2015 Google Inc. All Rights Reserved.
- *
- * Licensed under the Apache License, Version 2.0 (the "License");
- * you may not use this file except in compliance with the License.
- * You may obtain a copy of the License at
- *
- *      http://www.apache.org/licenses/LICENSE-2.0
- *
- * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * See the License for the specific language governing permissions and
- * limitations under the License.
- */
-
-(function () {
-  'use strict';
-
-  /**
-   * Class constructor for Ripple MDL component.
-   * Implements MDL component design pattern defined at:
-   * https://github.com/jasonmayes/mdl-component-design-pattern
-   *
-   * @constructor
-   * @param {HTMLElement} element The element that will be upgraded.
-   */
-
-  var MaterialRipple = function MaterialRipple(element) {
-    this.element_ = element;
-
-    // Initialize instance.
-    this.init();
-  };
-  window['MaterialRipple'] = MaterialRipple;
-
-  /**
-   * Store constants in one place so they can be updated easily.
-   *
-   * @enum {string | number}
-   * @private
-   */
-  MaterialRipple.prototype.Constant_ = {
-    INITIAL_SCALE: 'scale(0.0001, 0.0001)',
-    INITIAL_SIZE: '1px',
-    INITIAL_OPACITY: '0.4',
-    FINAL_OPACITY: '0',
-    FINAL_SCALE: ''
-  };
-
-  /**
-   * Store strings for class names defined by this component that are used in
-   * JavaScript. This allows us to simply change it in one place should we
-   * decide to modify at a later date.
-   *
-   * @enum {string}
-   * @private
-   */
-  MaterialRipple.prototype.CssClasses_ = {
-    RIPPLE_CENTER: 'mdl-ripple--center',
-    RIPPLE_EFFECT_IGNORE_EVENTS: 'mdl-js-ripple-effect--ignore-events',
-    RIPPLE: 'mdl-ripple',
-    IS_ANIMATING: 'is-animating',
-    IS_VISIBLE: 'is-visible'
-  };
-
-  /**
-   * Handle mouse / finger down on element.
-   *
-   * @param {Event} event The event that fired.
-   * @private
-   */
-  MaterialRipple.prototype.downHandler_ = function (event) {
-    if (!this.rippleElement_.style.width && !this.rippleElement_.style.height) {
-      var rect = this.element_.getBoundingClientRect();
-      this.boundHeight = rect.height;
-      this.boundWidth = rect.width;
-      this.rippleSize_ = Math.sqrt(rect.width * rect.width + rect.height * rect.height) * 2 + 2;
-      this.rippleElement_.style.width = this.rippleSize_ + 'px';
-      this.rippleElement_.style.height = this.rippleSize_ + 'px';
-    }
-
-    this.rippleElement_.classList.add(this.CssClasses_.IS_VISIBLE);
-
-    if (event.type === 'mousedown' && this.ignoringMouseDown_) {
-      this.ignoringMouseDown_ = false;
-    } else {
-      if (event.type === 'touchstart') {
-        this.ignoringMouseDown_ = true;
-      }
-      var frameCount = this.getFrameCount();
-      if (frameCount > 0) {
-        return;
-      }
-      this.setFrameCount(1);
-      var bound = event.currentTarget.getBoundingClientRect();
-      var x;
-      var y;
-      // Check if we are handling a keyboard click.
-      if (event.clientX === 0 && event.clientY === 0) {
-        x = Math.round(bound.width / 2);
-        y = Math.round(bound.height / 2);
-      } else {
-        var clientX = event.clientX !== undefined ? event.clientX : event.touches[0].clientX;
-        var clientY = event.clientY !== undefined ? event.clientY : event.touches[0].clientY;
-        x = Math.round(clientX - bound.left);
-        y = Math.round(clientY - bound.top);
-      }
-      this.setRippleXY(x, y);
-      this.setRippleStyles(true);
-      window.requestAnimationFrame(this.animFrameHandler.bind(this));
-    }
-  };
-
-  /**
-   * Handle mouse / finger up on element.
-   *
-   * @param {Event} event The event that fired.
-   * @private
-   */
-  MaterialRipple.prototype.upHandler_ = function (event) {
-    // Don't fire for the artificial "mouseup" generated by a double-click.
-    if (event && event.detail !== 2) {
-      // Allow a repaint to occur before removing this class, so the animation
-      // shows for tap events, which seem to trigger a mouseup too soon after
-      // mousedown.
-      window.setTimeout(function () {
-        this.rippleElement_.classList.remove(this.CssClasses_.IS_VISIBLE);
-      }.bind(this), 0);
-    }
-  };
-
-  /**
-   * Initialize element.
-   */
-  MaterialRipple.prototype.init = function () {
-    if (this.element_) {
-      var recentering = this.element_.classList.contains(this.CssClasses_.RIPPLE_CENTER);
-      if (!this.element_.classList.contains(this.CssClasses_.RIPPLE_EFFECT_IGNORE_EVENTS)) {
-        this.rippleElement_ = this.element_.querySelector('.' + this.CssClasses_.RIPPLE);
-        this.frameCount_ = 0;
-        this.rippleSize_ = 0;
-        this.x_ = 0;
-        this.y_ = 0;
-
-        // Touch start produces a compat mouse down event, which would cause a
-        // second ripples. To avoid that, we use this property to ignore the first
-        // mouse down after a touch start.
-        this.ignoringMouseDown_ = false;
-
-        this.boundDownHandler = this.downHandler_.bind(this);
-        this.element_.addEventListener('mousedown', this.boundDownHandler);
-        this.element_.addEventListener('touchstart', this.boundDownHandler);
-
-        this.boundUpHandler = this.upHandler_.bind(this);
-        this.element_.addEventListener('mouseup', this.boundUpHandler);
-        this.element_.addEventListener('mouseleave', this.boundUpHandler);
-        this.element_.addEventListener('touchend', this.boundUpHandler);
-        this.element_.addEventListener('blur', this.boundUpHandler);
-
-        /**
-         * Getter for frameCount_.
-         * @return {number} the frame count.
-         */
-        this.getFrameCount = function () {
-          return this.frameCount_;
-        };
-
-        /**
-         * Setter for frameCount_.
-         * @param {number} fC the frame count.
-         */
-        this.setFrameCount = function (fC) {
-          this.frameCount_ = fC;
-        };
-
-        /**
-         * Getter for rippleElement_.
-         * @return {Element} the ripple element.
-         */
-        this.getRippleElement = function () {
-          return this.rippleElement_;
-        };
-
-        /**
-         * Sets the ripple X and Y coordinates.
-         * @param  {number} newX the new X coordinate
-         * @param  {number} newY the new Y coordinate
-         */
-        this.setRippleXY = function (newX, newY) {
-          this.x_ = newX;
-          this.y_ = newY;
-        };
-
-        /**
-         * Sets the ripple styles.
-         * @param  {boolean} start whether or not this is the start frame.
-         */
-        this.setRippleStyles = function (start) {
-          if (this.rippleElement_ !== null) {
-            var transformString;
-            var scale;
-            var size;
-            var offset = 'translate(' + this.x_ + 'px, ' + this.y_ + 'px)';
-
-            if (start) {
-              scale = this.Constant_.INITIAL_SCALE;
-              size = this.Constant_.INITIAL_SIZE;
-            } else {
-              scale = this.Constant_.FINAL_SCALE;
-              size = this.rippleSize_ + 'px';
-              if (recentering) {
-                offset = 'translate(' + this.boundWidth / 2 + 'px, ' + this.boundHeight / 2 + 'px)';
-              }
-            }
-
-            transformString = 'translate(-50%, -50%) ' + offset + scale;
-
-            this.rippleElement_.style.webkitTransform = transformString;
-            this.rippleElement_.style.msTransform = transformString;
-            this.rippleElement_.style.transform = transformString;
-
-            if (start) {
-              this.rippleElement_.classList.remove(this.CssClasses_.IS_ANIMATING);
-            } else {
-              this.rippleElement_.classList.add(this.CssClasses_.IS_ANIMATING);
-            }
-          }
-        };
-
-        /**
-         * Handles an animation frame.
-         */
-        this.animFrameHandler = function () {
-          if (this.frameCount_-- > 0) {
-            window.requestAnimationFrame(this.animFrameHandler.bind(this));
-          } else {
-            this.setRippleStyles(false);
-          }
-        };
-      }
-    }
-  };
-
-  // The component registers itself. It can assume componentHandler is available
-  // in the global scope.
-  componentHandler.register({
-    constructor: MaterialRipple,
-    classAsString: 'MaterialRipple',
-    cssClass: 'mdl-js-ripple-effect',
-    widget: false
-  });
-})();
-
-exports.default = MaterialRipple;
 
 /***/ }),
 /* 4 */
@@ -3278,6 +3044,273 @@ Object.defineProperty(exports, "__esModule", {
   'use strict';
 
   /**
+   * Class constructor for Ripple MDL component.
+   * Implements MDL component design pattern defined at:
+   * https://github.com/jasonmayes/mdl-component-design-pattern
+   *
+   * @constructor
+   * @param {HTMLElement} element The element that will be upgraded.
+   */
+
+  var MaterialRipple = function MaterialRipple(element) {
+    this.element_ = element;
+
+    // Initialize instance.
+    this.init();
+  };
+  window['MaterialRipple'] = MaterialRipple;
+
+  /**
+   * Store constants in one place so they can be updated easily.
+   *
+   * @enum {string | number}
+   * @private
+   */
+  MaterialRipple.prototype.Constant_ = {
+    INITIAL_SCALE: 'scale(0.0001, 0.0001)',
+    INITIAL_SIZE: '1px',
+    INITIAL_OPACITY: '0.4',
+    FINAL_OPACITY: '0',
+    FINAL_SCALE: ''
+  };
+
+  /**
+   * Store strings for class names defined by this component that are used in
+   * JavaScript. This allows us to simply change it in one place should we
+   * decide to modify at a later date.
+   *
+   * @enum {string}
+   * @private
+   */
+  MaterialRipple.prototype.CssClasses_ = {
+    RIPPLE_CENTER: 'mdl-ripple--center',
+    RIPPLE_EFFECT_IGNORE_EVENTS: 'mdl-js-ripple-effect--ignore-events',
+    RIPPLE: 'mdl-ripple',
+    IS_ANIMATING: 'is-animating',
+    IS_VISIBLE: 'is-visible'
+  };
+
+  /**
+   * Handle mouse / finger down on element.
+   *
+   * @param {Event} event The event that fired.
+   * @private
+   */
+  MaterialRipple.prototype.downHandler_ = function (event) {
+    if (!this.rippleElement_.style.width && !this.rippleElement_.style.height) {
+      var rect = this.element_.getBoundingClientRect();
+      this.boundHeight = rect.height;
+      this.boundWidth = rect.width;
+      this.rippleSize_ = Math.sqrt(rect.width * rect.width + rect.height * rect.height) * 2 + 2;
+      this.rippleElement_.style.width = this.rippleSize_ + 'px';
+      this.rippleElement_.style.height = this.rippleSize_ + 'px';
+    }
+
+    this.rippleElement_.classList.add(this.CssClasses_.IS_VISIBLE);
+
+    if (event.type === 'mousedown' && this.ignoringMouseDown_) {
+      this.ignoringMouseDown_ = false;
+    } else {
+      if (event.type === 'touchstart') {
+        this.ignoringMouseDown_ = true;
+      }
+      var frameCount = this.getFrameCount();
+      if (frameCount > 0) {
+        return;
+      }
+      this.setFrameCount(1);
+      var bound = event.currentTarget.getBoundingClientRect();
+      var x;
+      var y;
+      // Check if we are handling a keyboard click.
+      if (event.clientX === 0 && event.clientY === 0) {
+        x = Math.round(bound.width / 2);
+        y = Math.round(bound.height / 2);
+      } else {
+        var clientX = event.clientX !== undefined ? event.clientX : event.touches[0].clientX;
+        var clientY = event.clientY !== undefined ? event.clientY : event.touches[0].clientY;
+        x = Math.round(clientX - bound.left);
+        y = Math.round(clientY - bound.top);
+      }
+      this.setRippleXY(x, y);
+      this.setRippleStyles(true);
+      window.requestAnimationFrame(this.animFrameHandler.bind(this));
+    }
+  };
+
+  /**
+   * Handle mouse / finger up on element.
+   *
+   * @param {Event} event The event that fired.
+   * @private
+   */
+  MaterialRipple.prototype.upHandler_ = function (event) {
+    // Don't fire for the artificial "mouseup" generated by a double-click.
+    if (event && event.detail !== 2) {
+      // Allow a repaint to occur before removing this class, so the animation
+      // shows for tap events, which seem to trigger a mouseup too soon after
+      // mousedown.
+      window.setTimeout(function () {
+        this.rippleElement_.classList.remove(this.CssClasses_.IS_VISIBLE);
+      }.bind(this), 0);
+    }
+  };
+
+  /**
+   * Initialize element.
+   */
+  MaterialRipple.prototype.init = function () {
+    if (this.element_) {
+      var recentering = this.element_.classList.contains(this.CssClasses_.RIPPLE_CENTER);
+      if (!this.element_.classList.contains(this.CssClasses_.RIPPLE_EFFECT_IGNORE_EVENTS)) {
+        this.rippleElement_ = this.element_.querySelector('.' + this.CssClasses_.RIPPLE);
+        this.frameCount_ = 0;
+        this.rippleSize_ = 0;
+        this.x_ = 0;
+        this.y_ = 0;
+
+        // Touch start produces a compat mouse down event, which would cause a
+        // second ripples. To avoid that, we use this property to ignore the first
+        // mouse down after a touch start.
+        this.ignoringMouseDown_ = false;
+
+        this.boundDownHandler = this.downHandler_.bind(this);
+        this.element_.addEventListener('mousedown', this.boundDownHandler);
+        this.element_.addEventListener('touchstart', this.boundDownHandler);
+
+        this.boundUpHandler = this.upHandler_.bind(this);
+        this.element_.addEventListener('mouseup', this.boundUpHandler);
+        this.element_.addEventListener('mouseleave', this.boundUpHandler);
+        this.element_.addEventListener('touchend', this.boundUpHandler);
+        this.element_.addEventListener('blur', this.boundUpHandler);
+
+        /**
+         * Getter for frameCount_.
+         * @return {number} the frame count.
+         */
+        this.getFrameCount = function () {
+          return this.frameCount_;
+        };
+
+        /**
+         * Setter for frameCount_.
+         * @param {number} fC the frame count.
+         */
+        this.setFrameCount = function (fC) {
+          this.frameCount_ = fC;
+        };
+
+        /**
+         * Getter for rippleElement_.
+         * @return {Element} the ripple element.
+         */
+        this.getRippleElement = function () {
+          return this.rippleElement_;
+        };
+
+        /**
+         * Sets the ripple X and Y coordinates.
+         * @param  {number} newX the new X coordinate
+         * @param  {number} newY the new Y coordinate
+         */
+        this.setRippleXY = function (newX, newY) {
+          this.x_ = newX;
+          this.y_ = newY;
+        };
+
+        /**
+         * Sets the ripple styles.
+         * @param  {boolean} start whether or not this is the start frame.
+         */
+        this.setRippleStyles = function (start) {
+          if (this.rippleElement_ !== null) {
+            var transformString;
+            var scale;
+            var size;
+            var offset = 'translate(' + this.x_ + 'px, ' + this.y_ + 'px)';
+
+            if (start) {
+              scale = this.Constant_.INITIAL_SCALE;
+              size = this.Constant_.INITIAL_SIZE;
+            } else {
+              scale = this.Constant_.FINAL_SCALE;
+              size = this.rippleSize_ + 'px';
+              if (recentering) {
+                offset = 'translate(' + this.boundWidth / 2 + 'px, ' + this.boundHeight / 2 + 'px)';
+              }
+            }
+
+            transformString = 'translate(-50%, -50%) ' + offset + scale;
+
+            this.rippleElement_.style.webkitTransform = transformString;
+            this.rippleElement_.style.msTransform = transformString;
+            this.rippleElement_.style.transform = transformString;
+
+            if (start) {
+              this.rippleElement_.classList.remove(this.CssClasses_.IS_ANIMATING);
+            } else {
+              this.rippleElement_.classList.add(this.CssClasses_.IS_ANIMATING);
+            }
+          }
+        };
+
+        /**
+         * Handles an animation frame.
+         */
+        this.animFrameHandler = function () {
+          if (this.frameCount_-- > 0) {
+            window.requestAnimationFrame(this.animFrameHandler.bind(this));
+          } else {
+            this.setRippleStyles(false);
+          }
+        };
+      }
+    }
+  };
+
+  // The component registers itself. It can assume componentHandler is available
+  // in the global scope.
+  componentHandler.register({
+    constructor: MaterialRipple,
+    classAsString: 'MaterialRipple',
+    cssClass: 'mdl-js-ripple-effect',
+    widget: false
+  });
+})();
+
+exports.default = MaterialRipple;
+
+/***/ }),
+/* 12 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+/**
+ * @license
+ * Copyright 2015 Google Inc. All Rights Reserved.
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *      http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
+(function () {
+  'use strict';
+
+  /**
    * Class constructor for Slider MDL component.
    * Implements MDL component design pattern defined at:
    * https://github.com/jasonmayes/mdl-component-design-pattern
@@ -3504,7 +3537,7 @@ Object.defineProperty(exports, "__esModule", {
 exports.default = MaterialSlider;
 
 /***/ }),
-/* 12 */
+/* 13 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -3703,7 +3736,7 @@ Object.defineProperty(exports, "__esModule", {
 exports.default = MaterialSnackbar;
 
 /***/ }),
-/* 13 */
+/* 14 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -3862,7 +3895,7 @@ Object.defineProperty(exports, "__esModule", {
 exports.default = MaterialSpinner;
 
 /***/ }),
-/* 14 */
+/* 15 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -4142,7 +4175,7 @@ Object.defineProperty(exports, "__esModule", {
 exports.default = MaterialSwitch;
 
 /***/ }),
-/* 15 */
+/* 16 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -4316,7 +4349,7 @@ Object.defineProperty(exports, "__esModule", {
 exports.default = MaterialTabs;
 
 /***/ }),
-/* 16 */
+/* 17 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -4608,7 +4641,7 @@ Object.defineProperty(exports, "__esModule", {
 exports.default = MaterialTextfield;
 
 /***/ }),
-/* 17 */
+/* 18 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -4671,7 +4704,7 @@ var rAF = function () {
 exports.default = rAF;
 
 /***/ }),
-/* 18 */
+/* 19 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -4835,6 +4868,255 @@ Object.defineProperty(exports, "__esModule", {
   });
 })();
 exports.default = MaterialTooltip;
+
+/***/ }),
+/* 20 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+    value: true
+});
+
+var _jokeList = __webpack_require__(21);
+
+var _jokeList2 = _interopRequireDefault(_jokeList);
+
+var _joke = __webpack_require__(1);
+
+var _joke2 = _interopRequireDefault(_joke);
+
+var _jokeFetcher = __webpack_require__(23);
+
+var _jokeFetcher2 = _interopRequireDefault(_jokeFetcher);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+// TODO: find a better name?
+// Here might be a good place to fetch add and remove items from a list
+exports.default = function () {
+    'use strict';
+
+    var jokeList = new _jokeList2.default(document.getElementById('joke-list'));
+    var JOKE_FETCH_COUNT = 10;
+
+    var _loop = function _loop(i) {
+        (0, _jokeFetcher2.default)().then(function (response) {
+            return jokeList.addJoke(new _joke2.default(i, 'Chuck Norris', response, Math.floor(Math.random() * 999)));
+        });
+    };
+
+    for (var i = 0; i < JOKE_FETCH_COUNT; i++) {
+        _loop(i);
+    }
+}();
+
+/***/ }),
+/* 21 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+        value: true
+});
+
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+var _joke = __webpack_require__(1);
+
+var _joke2 = _interopRequireDefault(_joke);
+
+var _createElement = __webpack_require__(22);
+
+var _createElement2 = _interopRequireDefault(_createElement);
+
+var _mdlComponentHandler = __webpack_require__(0);
+
+var _mdlComponentHandler2 = _interopRequireDefault(_mdlComponentHandler);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+var JokeList = function () {
+        /**
+         * @param {HTMLElement} element
+         */
+        function JokeList(element) {
+                _classCallCheck(this, JokeList);
+
+                this.element = element;
+        }
+
+        /**
+         * adds a joke inside the dom list element
+         * @param {Joke} joke 
+         */
+
+
+        _createClass(JokeList, [{
+                key: 'addJoke',
+                value: function addJoke(joke) {
+                        // this is what we are creating
+                        // <div class="mdl-card--joke mdl-card mdl-shadow--2dp">
+                        //     <div class="mdl-card__title">
+                        //         <h2 class="mdl-card__title-text">
+                        //             Joke title
+                        //         </h2>
+                        //     </div>
+                        //     <div class="mdl-card__supporting-text">
+                        //         Joke text
+                        //     </div>
+                        //     <div class="mdl-card__actions">
+                        //         <div class="mdl-layout-spacer"></div>
+                        //         <div>
+                        //             Joke votes
+                        //         </div>
+                        //         <button class="mdl-button mdl-button--icon mdl-js-button mdl-js-ripple-effect">
+                        //             <i class="material-icons">tag_faces</i>
+                        //         </button>
+                        //     </div>
+                        //     <div class="mdl-card__menu">
+                        //         <button class="mdl-button mdl-button--icon mdl-js-button mdl-js-ripple-effect">
+                        //             <i class="material-icons">content_copy</i>
+                        //         </button>
+                        //     </div>
+                        // </div>
+
+                        var list = this.element;
+                        // <div class="mdl-card mdl-card--joke mdl-shadow--2dp">
+                        var card = (0, _createElement2.default)('div', 'mdl-card mdl-card--joke mdl-shadow--2dp');
+                        list.appendChild(card);
+
+                        // <div class="mdl-card__title">
+                        var cardTitle = (0, _createElement2.default)('div', 'mdl-card__title');
+                        card.appendChild(cardTitle);
+
+                        // <h2 class="mdl-card__title-text">Joke title</h2>
+                        var cardTitleText = (0, _createElement2.default)('h2', 'mdl-card__title-text');
+                        cardTitleText.innerHTML = joke.title;
+                        cardTitle.appendChild(cardTitleText);
+
+                        // div class="mdl-card__supporting-text">here goes the joke...</div>
+                        var cardSupportingText = (0, _createElement2.default)('div', 'mdl-card__supporting-text');
+                        cardSupportingText.innerHTML = joke.text;
+                        card.appendChild(cardSupportingText);
+
+                        // <div class="mdl-card__actions">
+                        var cardActions = (0, _createElement2.default)('div', 'mdl-card__actions');
+                        card.appendChild(cardActions);
+
+                        // <div class="mdl-layout-spacer"></div>
+                        var layoutSpacer = (0, _createElement2.default)('div', 'mdl-layout-spacer');
+                        cardActions.appendChild(layoutSpacer);
+
+                        // <div>joke_votes</div>
+                        var jokeVotes = document.createElement('div');
+                        jokeVotes.innerHTML = joke.votes;
+                        cardActions.appendChild(jokeVotes);
+
+                        // <button class="mdl-button mdl-button--icon mdl-js-button mdl-js-ripple-effect">
+                        var smileButton = (0, _createElement2.default)('button', 'mdl-button mdl-button--icon mdl-js-button mdl-js-ripple-effect');
+                        cardActions.appendChild(smileButton);
+
+                        // <i class="material-icons">tag_faces</i>
+                        var smileIcon = (0, _createElement2.default)('i', 'material-icons');
+                        smileIcon.innerHTML = 'tag_faces';
+                        smileButton.appendChild(smileIcon);
+
+                        // <div class="mdl-card__menu">
+                        var cardMenu = (0, _createElement2.default)('div', 'mdl-card__menu');
+                        card.appendChild(cardMenu);
+
+                        // <button class="mdl-button mdl-button--icon mdl-js-button mdl-js-ripple-effect">
+                        var copyButton = (0, _createElement2.default)('button', 'mdl-button mdl-button--icon mdl-js-button mdl-js-ripple-effect');
+                        cardMenu.appendChild(copyButton);
+
+                        // i class="material-icons">content_copy</i>
+                        var copyIcon = (0, _createElement2.default)('i', 'material-icons');
+                        copyIcon.innerHTML = 'content_copy';
+                        copyButton.appendChild(copyIcon);
+
+                        _mdlComponentHandler2.default.upgradeElements(smileButton);
+                        _mdlComponentHandler2.default.upgradeElements(copyButton);
+                }
+        }, {
+                key: 'removeJoke',
+                value: function removeJoke() {
+                        // TODO: implement this method
+                }
+        }]);
+
+        return JokeList;
+}();
+
+exports.default = JokeList;
+// export default Joke;
+
+/***/ }),
+/* 22 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+    value: true
+});
+/**
+ * Creates a new html Element
+ * @param {string} element 
+ * @param {string} className 
+ * @returns {HTMLElement}
+ */
+function createElement(element, className) {
+    var newElement = document.createElement(element);
+
+    if (className) {
+        var classes = className.split(' ');
+        for (var i = 0; i < classes.length; i++) {
+            newElement.classList.add(classes[i]);
+        }
+    }
+
+    return newElement;
+}
+
+exports.default = createElement;
+
+/***/ }),
+/* 23 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+    value: true
+});
+/**
+ * @param {string} id - joke's id
+ * @returns {Promise}
+ */
+function fetchJoke(id) {
+    var url = 'https://api.chucknorris.io/jokes/random';
+    if (id) {
+        url += id;
+    }
+    return new Promise(function (resolve, reject) {
+        fetch(url).then(function (response) {
+            return response.json();
+        }).then(function (response) {
+            return resolve(response.value);
+        });
+    });
+}
+
+exports.default = fetchJoke;
 
 /***/ })
 /******/ ]);
