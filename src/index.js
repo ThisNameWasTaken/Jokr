@@ -17,6 +17,4 @@ import MaterialTextfield from './textfield/textfield';
 import rAF from './third_party/rAF';
 import MaterialTooltip from './tooltip/tooltip';
 
-import printJokes from './jokePrinter/jokePrinter';
-
-printJokes();
+import './jokePrinter/jokePrinter';
