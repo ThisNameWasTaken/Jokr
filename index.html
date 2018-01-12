@@ -6,10 +6,40 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Jokr</title>
+
+    <!-- Main stylesheet -->
     <link rel="stylesheet" href="./dist/main.css">
+
+    <!-- Material Icons -->
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+
+    <!-- Roboto font family -->
+    <link href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700" rel="stylesheet">
 </head>
 
 <body>
+    <div class="mdl-layout mdl-js-layout mdl-layout--fixed-header">
+        <header class="mdl-layout__header">
+            <div class="mdl-layout__header-row">
+                <!-- Title -->
+                <span class="mdl-layout-title">Jokr</span>
+                <!-- Add spacer, to align navigation to the right -->
+                <div class="mdl-layout-spacer"></div>
+            </div>
+        </header>
+        <div class="mdl-layout__drawer">
+            <nav class="mdl-navigation">
+                <a class="mdl-navigation__link" href="">Latest jokes</a>
+                <a class="mdl-navigation__link" href="">Liked jokes</a>
+            </nav>
+        </div>
+        <main class="mdl-layout__content">
+            <div class="container" id="joke-list">
+                <!-- Jokes go here -->
+            </div>
+        </main>
+    </div>
+
     <script src="./dist/jokr.bundle.js"></script>
 </body>
 
