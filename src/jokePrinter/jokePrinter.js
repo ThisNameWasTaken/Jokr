@@ -16,6 +16,6 @@ export default (function () {
                 response,
                 Math.floor(Math.random() * 999)
             )
-        ));
+        ));  
     }
 })();

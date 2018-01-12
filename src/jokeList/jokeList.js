@@ -82,8 +82,11 @@ class JokeList {
         componentHandler.upgradeElements(copyButton);
     }
 
+    /**
+    * removes the last joke inside the element joke-list
+    */
     removeJoke() {
-        // TODO: implement this method
+        this.element.removeChild(this.element.lastChild);
     }
 }
 
