@@ -34,8 +34,15 @@
             </nav>
         </div>
         <main class="mdl-layout__content">
+            <!-- this input is used for coping jokes -->
+            <input type="text" id="hidden-copy-input">
             <div class="container" id="joke-list">
                 <!-- Jokes go here -->
+            </div>
+            <!-- snackbar to let the users know they've copied a joke to the clipboard -->
+            <div id="snackbar" class="mdl-js-snackbar mdl-snackbar">
+                <div class="mdl-snackbar__text"></div>
+                <button class="mdl-snackbar__action" type="button"></button>
             </div>
         </main>
     </div>
