@@ -586,16 +586,12 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 
 var Joke =
 /**
- * @param {string} id 
- * @param {string} text
  * @param {string} title
  * @param {number} votes 
  */
-function Joke(id, title, text, votes) {
+function Joke(text, votes) {
     _classCallCheck(this, Joke);
 
-    this.id = id;
-    this.title = title;
     this.text = text;
     this.votes = votes;
 };
@@ -4902,14 +4898,10 @@ exports.default = function () {
     var jokeList = new _jokeList2.default(document.getElementById('joke-list'));
     var JOKE_FETCH_COUNT = 10;
 
-    var _loop = function _loop(i) {
-        (0, _jokeFetcher2.default)().then(function (response) {
-            return jokeList.addJoke(new _joke2.default(i, 'Chuck Norris', response, Math.floor(Math.random() * 999)));
-        });
-    };
-
     for (var i = 0; i < JOKE_FETCH_COUNT; i++) {
-        _loop(i);
+        (0, _jokeFetcher2.default)().then(function (response) {
+            return jokeList.addJoke(new _joke2.default(response, Math.floor(Math.random() * 999)));
+        });
     }
 }();
 
@@ -4963,24 +4955,20 @@ var JokeList = function () {
                 value: function addJoke(joke) {
                         // this is what we are creating
                         // <div class="mdl-card--joke mdl-card mdl-shadow--2dp">
-                        //     <div class="mdl-card__title">
-                        //         <h2 class="mdl-card__title-text">
-                        //             Joke title
-                        //         </h2>
-                        //     </div>
                         //     <div class="mdl-card__supporting-text">
-                        //         Joke text
+                        //         Joke goes here ...
                         //     </div>
+
                         //     <div class="mdl-card__actions">
                         //         <div class="mdl-layout-spacer"></div>
                         //         <div>
                         //             Joke votes
                         //         </div>
+
                         //         <button class="mdl-button mdl-button--icon mdl-js-button mdl-js-ripple-effect">
                         //             <i class="material-icons">tag_faces</i>
                         //         </button>
-                        //     </div>
-                        //     <div class="mdl-card__menu">
+
                         //         <button class="mdl-button mdl-button--icon mdl-js-button mdl-js-ripple-effect">
                         //             <i class="material-icons">content_copy</i>
                         //         </button>
@@ -4992,16 +4980,7 @@ var JokeList = function () {
                         var card = (0, _createElement2.default)('div', 'mdl-card mdl-card--joke mdl-shadow--2dp');
                         list.appendChild(card);
 
-                        // <div class="mdl-card__title">
-                        var cardTitle = (0, _createElement2.default)('div', 'mdl-card__title');
-                        card.appendChild(cardTitle);
-
-                        // <h2 class="mdl-card__title-text">Joke title</h2>
-                        var cardTitleText = (0, _createElement2.default)('h2', 'mdl-card__title-text');
-                        cardTitleText.innerHTML = joke.title;
-                        cardTitle.appendChild(cardTitleText);
-
-                        // div class="mdl-card__supporting-text">here goes the joke...</div>
+                        // div class="mdl-card__supporting-text" > here goes the joke...</div >
                         var cardSupportingText = (0, _createElement2.default)('div', 'mdl-card__supporting-text');
                         cardSupportingText.innerHTML = joke.text;
                         card.appendChild(cardSupportingText);
@@ -5028,13 +5007,9 @@ var JokeList = function () {
                         smileIcon.innerHTML = 'tag_faces';
                         smileButton.appendChild(smileIcon);
 
-                        // <div class="mdl-card__menu">
-                        var cardMenu = (0, _createElement2.default)('div', 'mdl-card__menu');
-                        card.appendChild(cardMenu);
-
                         // <button class="mdl-button mdl-button--icon mdl-js-button mdl-js-ripple-effect">
                         var copyButton = (0, _createElement2.default)('button', 'mdl-button mdl-button--icon mdl-js-button mdl-js-ripple-effect');
-                        cardMenu.appendChild(copyButton);
+                        cardActions.appendChild(copyButton);
 
                         // i class="material-icons">content_copy</i>
                         var copyIcon = (0, _createElement2.default)('i', 'material-icons');
@@ -5055,7 +5030,6 @@ var JokeList = function () {
 }();
 
 exports.default = JokeList;
-// export default Joke;
 
 /***/ }),
 /* 22 */
