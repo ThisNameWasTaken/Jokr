@@ -588,11 +588,16 @@ var _createElement = __webpack_require__(2);
 
 var _createElement2 = _interopRequireDefault(_createElement);
 
+var _mdlComponentHandler = __webpack_require__(0);
+
+var _mdlComponentHandler2 = _interopRequireDefault(_mdlComponentHandler);
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
 var HIDDEN_INPUT_ID = 'hidden-copy-input';
+var SNACKBAR_ID = "snackbar";
 
 var Joke = function () {
     /**
@@ -604,26 +609,68 @@ var Joke = function () {
 
         this.text = text;
         this.votes = votes;
-        // we set this input's value to the joke's then copy it
+
+        /** @private we set this input's value to the joke's then copy it */
         this._hiddenCopyInput = document.getElementById(HIDDEN_INPUT_ID);
+        /** @private used to let the user know they've copied the joke */
+        this._snackBar = document.getElementById(SNACKBAR_ID);
     }
 
     // copies a joke's text
 
 
     _createClass(Joke, [{
-        key: 'copy',
+        key: "copy",
         value: function copy() {
             if (!this._hiddenCopyInput) {
-                this._hiddenCopyInput = document.createElement('input');
-                this._hiddenCopyInput.type = "text";
-                this._hiddenCopyInput.id = HIDDEN_INPUT_ID;
-                document.body.appendChild(this._hiddenCopyInput);
+                this._createHiddenCopyInput();
             }
 
             this._hiddenCopyInput.value = this.text;
             this._hiddenCopyInput.select();
             document.execCommand("copy");
+
+            if (!this._snackBar) {
+                this._createSnackbar();
+            }
+
+            this._snackBar.MaterialSnackbar.showSnackbar({
+                message: 'Joke copied to clipboard.'
+            });
+        }
+
+        /** @private creates an input with an id of HIDDEN_INPUT_ID and adds it to the DOM */
+
+    }, {
+        key: "_createHiddenCopyInput",
+        value: function _createHiddenCopyInput() {
+            // <input type="text" id="hidden-copy-input">
+            this._hiddenCopyInput = document.createElement('input');
+            this._hiddenCopyInput.type = "text";
+            this._hiddenCopyInput.id = HIDDEN_INPUT_ID;
+            document.body.appendChild(this._hiddenCopyInput);
+        }
+
+        /** @private creates snackbar with an id of SACKBAR_ID and adds it to the DOM */
+
+    }, {
+        key: "_createSnackbar",
+        value: function _createSnackbar() {
+            // <div id="snackbar" class="mdl-js-snackbar mdl-snackbar">
+            this._snackBar = (0, _createElement2.default)('div', 'mdl-js-snackbar mdl-snackbar');
+            this._snackBar.id = SNACKBAR_ID;
+            document.body.appendChild(this._snackBar);
+
+            // <div class="mdl-snackbar__text"></div>
+            var snackbarText = (0, _createElement2.default)('div', 'mdl-snackbar__text');
+            this._snackBar.appendChild(snackbarText);
+
+            // <button type="button" class="mdl-snackbar__action"></button>
+            var snackbarAction = (0, _createElement2.default)('button', 'mdl-snackbar__action');
+            snackbarAction.type = "button";
+            this._snackBar.appendChild(snackbarAction);
+
+            _mdlComponentHandler2.default.upgradeElements(this._snackBar);
         }
     }]);
 
