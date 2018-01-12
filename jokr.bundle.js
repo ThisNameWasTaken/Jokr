@@ -586,16 +586,12 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 
 var Joke =
 /**
- * @param {string} id 
- * @param {string} text
  * @param {string} title
  * @param {number} votes 
  */
-function Joke(id, title, text, votes) {
+function Joke(text, votes) {
     _classCallCheck(this, Joke);
 
-    this.id = id;
-    this.title = title;
     this.text = text;
     this.votes = votes;
 };
@@ -4902,14 +4898,10 @@ exports.default = function () {
     var jokeList = new _jokeList2.default(document.getElementById('joke-list'));
     var JOKE_FETCH_COUNT = 10;
 
-    var _loop = function _loop(i) {
-        (0, _jokeFetcher2.default)().then(function (response) {
-            return jokeList.addJoke(new _joke2.default(i, 'Chuck Norris', response, Math.floor(Math.random() * 999)));
-        });
-    };
-
     for (var i = 0; i < JOKE_FETCH_COUNT; i++) {
-        _loop(i);
+        (0, _jokeFetcher2.default)().then(function (response) {
+            return jokeList.addJoke(new _joke2.default(response, Math.floor(Math.random() * 999)));
+        });
     }
 }();
 
@@ -5055,12 +5047,86 @@ var JokeList = function () {
             this.element.removeChild(this.element.lastChild);
         }
     }]);
+        _createClass(JokeList, [{
+                key: 'addJoke',
+                value: function addJoke(joke) {
+                        // this is what we are creating
+                        // <div class="mdl-card--joke mdl-card mdl-shadow--2dp">
+                        //     <div class="mdl-card__supporting-text">
+                        //         Joke goes here ...
+                        //     </div>
 
-    return JokeList;
+                        //     <div class="mdl-card__actions">
+                        //         <div class="mdl-layout-spacer"></div>
+                        //         <div>
+                        //             Joke votes
+                        //         </div>
+
+                        //         <button class="mdl-button mdl-button--icon mdl-js-button mdl-js-ripple-effect">
+                        //             <i class="material-icons">tag_faces</i>
+                        //         </button>
+
+                        //         <button class="mdl-button mdl-button--icon mdl-js-button mdl-js-ripple-effect">
+                        //             <i class="material-icons">content_copy</i>
+                        //         </button>
+                        //     </div>
+                        // </div>
+
+                        var list = this.element;
+                        // <div class="mdl-card mdl-card--joke mdl-shadow--2dp">
+                        var card = (0, _createElement2.default)('div', 'mdl-card mdl-card--joke mdl-shadow--2dp');
+                        list.appendChild(card);
+
+                        // div class="mdl-card__supporting-text" > here goes the joke...</div >
+                        var cardSupportingText = (0, _createElement2.default)('div', 'mdl-card__supporting-text');
+                        cardSupportingText.innerHTML = joke.text;
+                        card.appendChild(cardSupportingText);
+
+                        // <div class="mdl-card__actions">
+                        var cardActions = (0, _createElement2.default)('div', 'mdl-card__actions');
+                        card.appendChild(cardActions);
+
+                        // <div class="mdl-layout-spacer"></div>
+                        var layoutSpacer = (0, _createElement2.default)('div', 'mdl-layout-spacer');
+                        cardActions.appendChild(layoutSpacer);
+
+                        // <div>joke_votes</div>
+                        var jokeVotes = document.createElement('div');
+                        jokeVotes.innerHTML = joke.votes;
+                        cardActions.appendChild(jokeVotes);
+
+                        // <button class="mdl-button mdl-button--icon mdl-js-button mdl-js-ripple-effect">
+                        var smileButton = (0, _createElement2.default)('button', 'mdl-button mdl-button--icon mdl-js-button mdl-js-ripple-effect');
+                        cardActions.appendChild(smileButton);
+
+                        // <i class="material-icons">tag_faces</i>
+                        var smileIcon = (0, _createElement2.default)('i', 'material-icons');
+                        smileIcon.innerHTML = 'tag_faces';
+                        smileButton.appendChild(smileIcon);
+
+                        // <button class="mdl-button mdl-button--icon mdl-js-button mdl-js-ripple-effect">
+                        var copyButton = (0, _createElement2.default)('button', 'mdl-button mdl-button--icon mdl-js-button mdl-js-ripple-effect');
+                        cardActions.appendChild(copyButton);
+
+                        // i class="material-icons">content_copy</i>
+                        var copyIcon = (0, _createElement2.default)('i', 'material-icons');
+                        copyIcon.innerHTML = 'content_copy';
+                        copyButton.appendChild(copyIcon);
+
+                        _mdlComponentHandler2.default.upgradeElements(smileButton);
+                        _mdlComponentHandler2.default.upgradeElements(copyButton);
+                }
+        }, {
+                key: 'removeJoke',
+                value: function removeJoke() {
+                        // TODO: implement this method
+                }
+        }]);
+
+        return JokeList;
 }();
 
 exports.default = JokeList;
-// export default Joke;
 
 /***/ }),
 /* 22 */
