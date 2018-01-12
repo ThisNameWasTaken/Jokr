@@ -13,8 +13,6 @@ export default (function () {
     for (let i = 0; i < JOKE_FETCH_COUNT; i++) {
         fetchJoke().then(response => jokeList.addJoke(
             new Joke(
-                i,
-                'Chuck Norris',
                 response,
                 Math.floor(Math.random() * 999)
             )

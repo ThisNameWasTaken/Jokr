@@ -17,24 +17,20 @@ class JokeList {
     addJoke(joke) {
         // this is what we are creating
         // <div class="mdl-card--joke mdl-card mdl-shadow--2dp">
-        //     <div class="mdl-card__title">
-        //         <h2 class="mdl-card__title-text">
-        //             Joke title
-        //         </h2>
-        //     </div>
         //     <div class="mdl-card__supporting-text">
-        //         Joke text
+        //         Joke goes here ...
         //     </div>
+
         //     <div class="mdl-card__actions">
         //         <div class="mdl-layout-spacer"></div>
         //         <div>
         //             Joke votes
         //         </div>
+
         //         <button class="mdl-button mdl-button--icon mdl-js-button mdl-js-ripple-effect">
         //             <i class="material-icons">tag_faces</i>
         //         </button>
-        //     </div>
-        //     <div class="mdl-card__menu">
+
         //         <button class="mdl-button mdl-button--icon mdl-js-button mdl-js-ripple-effect">
         //             <i class="material-icons">content_copy</i>
         //         </button>
@@ -46,16 +42,7 @@ class JokeList {
         let card = createElement('div', 'mdl-card mdl-card--joke mdl-shadow--2dp');
         list.appendChild(card);
 
-        // <div class="mdl-card__title">
-        let cardTitle = createElement('div', 'mdl-card__title');
-        card.appendChild(cardTitle);
-
-        // <h2 class="mdl-card__title-text">Joke title</h2>
-        let cardTitleText = createElement('h2', 'mdl-card__title-text');
-        cardTitleText.innerHTML = joke.title;
-        cardTitle.appendChild(cardTitleText);
-
-        // div class="mdl-card__supporting-text">here goes the joke...</div>
+        // div class="mdl-card__supporting-text" > here goes the joke...</div >
         let cardSupportingText = createElement('div', 'mdl-card__supporting-text');
         cardSupportingText.innerHTML = joke.text;
         card.appendChild(cardSupportingText);
@@ -82,13 +69,9 @@ class JokeList {
         smileIcon.innerHTML = 'tag_faces';
         smileButton.appendChild(smileIcon);
 
-        // <div class="mdl-card__menu">
-        let cardMenu = createElement('div', 'mdl-card__menu');
-        card.appendChild(cardMenu);
-
         // <button class="mdl-button mdl-button--icon mdl-js-button mdl-js-ripple-effect">
         let copyButton = createElement('button', 'mdl-button mdl-button--icon mdl-js-button mdl-js-ripple-effect');
-        cardMenu.appendChild(copyButton);
+        cardActions.appendChild(copyButton);
 
         // i class="material-icons">content_copy</i>
         let copyIcon = createElement('i', 'material-icons');
@@ -108,4 +91,3 @@ class JokeList {
 }
 
 export default JokeList;
-// export default Joke;
