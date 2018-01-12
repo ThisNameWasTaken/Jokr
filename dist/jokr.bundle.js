@@ -60,7 +60,7 @@
 /******/ 	__webpack_require__.p = "";
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 2);
+/******/ 	return __webpack_require__(__webpack_require__.s = 3);
 /******/ })
 /************************************************************************/
 /******/ ([
@@ -582,19 +582,53 @@ Object.defineProperty(exports, "__esModule", {
     value: true
 });
 
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+var _createElement = __webpack_require__(2);
+
+var _createElement2 = _interopRequireDefault(_createElement);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
-var Joke =
-/**
- * @param {string} title
- * @param {number} votes 
- */
-function Joke(text, votes) {
-    _classCallCheck(this, Joke);
+var HIDDEN_INPUT_ID = 'hidden-copy-input';
 
-    this.text = text;
-    this.votes = votes;
-};
+var Joke = function () {
+    /**
+     * @param {string} title
+     * @param {number} votes 
+     */
+    function Joke(text, votes) {
+        _classCallCheck(this, Joke);
+
+        this.text = text;
+        this.votes = votes;
+        // we set this input's value to the joke's then copy it
+        this._hiddenCopyInput = document.getElementById(HIDDEN_INPUT_ID);
+    }
+
+    // copies a joke's text
+
+
+    _createClass(Joke, [{
+        key: 'copy',
+        value: function copy() {
+            if (!this._hiddenCopyInput) {
+                this._hiddenCopyInput = document.createElement('input');
+                this._hiddenCopyInput.type = "text";
+                this._hiddenCopyInput.id = HIDDEN_INPUT_ID;
+                document.body.appendChild(this._hiddenCopyInput);
+            }
+
+            this._hiddenCopyInput.value = this.text;
+            this._hiddenCopyInput.select();
+            document.execCommand("copy");
+        }
+    }]);
+
+    return Joke;
+}();
 
 exports.default = Joke;
 
@@ -605,84 +639,115 @@ exports.default = Joke;
 "use strict";
 
 
+Object.defineProperty(exports, "__esModule", {
+    value: true
+});
+/**
+ * Creates a new html Element
+ * @param {string} element 
+ * @param {string} className 
+ * @returns {HTMLElement}
+ */
+function createElement(element, className) {
+    var newElement = document.createElement(element);
+
+    if (className) {
+        var classes = className.split(' ');
+        for (var i = 0; i < classes.length; i++) {
+            newElement.classList.add(classes[i]);
+        }
+    }
+
+    return newElement;
+}
+
+exports.default = createElement;
+
+/***/ }),
+/* 3 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
 var _mdlComponentHandler = __webpack_require__(0);
 
 var _mdlComponentHandler2 = _interopRequireDefault(_mdlComponentHandler);
 
-var _button = __webpack_require__(3);
+var _button = __webpack_require__(4);
 
 var _button2 = _interopRequireDefault(_button);
 
-var _checkbox = __webpack_require__(4);
+var _checkbox = __webpack_require__(5);
 
 var _checkbox2 = _interopRequireDefault(_checkbox);
 
-var _dataTable = __webpack_require__(5);
+var _dataTable = __webpack_require__(6);
 
 var _dataTable2 = _interopRequireDefault(_dataTable);
 
-var _iconToggle = __webpack_require__(6);
+var _iconToggle = __webpack_require__(7);
 
 var _iconToggle2 = _interopRequireDefault(_iconToggle);
 
-var _layout = __webpack_require__(7);
+var _layout = __webpack_require__(8);
 
 var _layout2 = _interopRequireDefault(_layout);
 
-var _menu = __webpack_require__(8);
+var _menu = __webpack_require__(9);
 
 var _menu2 = _interopRequireDefault(_menu);
 
-var _progress = __webpack_require__(9);
+var _progress = __webpack_require__(10);
 
 var _progress2 = _interopRequireDefault(_progress);
 
-var _radio = __webpack_require__(10);
+var _radio = __webpack_require__(11);
 
 var _radio2 = _interopRequireDefault(_radio);
 
-var _ripple = __webpack_require__(11);
+var _ripple = __webpack_require__(12);
 
 var _ripple2 = _interopRequireDefault(_ripple);
 
-var _slider = __webpack_require__(12);
+var _slider = __webpack_require__(13);
 
 var _slider2 = _interopRequireDefault(_slider);
 
-var _snackbar = __webpack_require__(13);
+var _snackbar = __webpack_require__(14);
 
 var _snackbar2 = _interopRequireDefault(_snackbar);
 
-var _spinner = __webpack_require__(14);
+var _spinner = __webpack_require__(15);
 
 var _spinner2 = _interopRequireDefault(_spinner);
 
-var _switch = __webpack_require__(15);
+var _switch = __webpack_require__(16);
 
 var _switch2 = _interopRequireDefault(_switch);
 
-var _tabs = __webpack_require__(16);
+var _tabs = __webpack_require__(17);
 
 var _tabs2 = _interopRequireDefault(_tabs);
 
-var _textfield = __webpack_require__(17);
+var _textfield = __webpack_require__(18);
 
 var _textfield2 = _interopRequireDefault(_textfield);
 
-var _rAF = __webpack_require__(18);
+var _rAF = __webpack_require__(19);
 
 var _rAF2 = _interopRequireDefault(_rAF);
 
-var _tooltip = __webpack_require__(19);
+var _tooltip = __webpack_require__(20);
 
 var _tooltip2 = _interopRequireDefault(_tooltip);
 
-__webpack_require__(20);
+__webpack_require__(21);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 /***/ }),
-/* 3 */
+/* 4 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -819,7 +884,7 @@ Object.defineProperty(exports, "__esModule", {
 exports.default = MaterialButton;
 
 /***/ }),
-/* 4 */
+/* 5 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -1099,7 +1164,7 @@ Object.defineProperty(exports, "__esModule", {
 exports.default = MaterialCheckbox;
 
 /***/ }),
-/* 5 */
+/* 6 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -1284,7 +1349,7 @@ Object.defineProperty(exports, "__esModule", {
 exports.default = MaterialDataTable;
 
 /***/ }),
-/* 6 */
+/* 7 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -1547,7 +1612,7 @@ Object.defineProperty(exports, "__esModule", {
 exports.default = MaterialIconToggle;
 
 /***/ }),
-/* 7 */
+/* 8 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -2114,7 +2179,7 @@ Object.defineProperty(exports, "__esModule", {
 exports.default = MaterialLayout;
 
 /***/ }),
-/* 8 */
+/* 9 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -2593,7 +2658,7 @@ Object.defineProperty(exports, "__esModule", {
 exports.default = MaterialMenu;
 
 /***/ }),
-/* 9 */
+/* 10 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -2722,7 +2787,7 @@ exports.default = MaterialMenu;
 })();
 
 /***/ }),
-/* 10 */
+/* 11 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -3010,7 +3075,7 @@ Object.defineProperty(exports, "__esModule", {
 exports.default = MaterialRadio;
 
 /***/ }),
-/* 11 */
+/* 12 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -3277,7 +3342,7 @@ Object.defineProperty(exports, "__esModule", {
 exports.default = MaterialRipple;
 
 /***/ }),
-/* 12 */
+/* 13 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -3533,7 +3598,7 @@ Object.defineProperty(exports, "__esModule", {
 exports.default = MaterialSlider;
 
 /***/ }),
-/* 13 */
+/* 14 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -3732,7 +3797,7 @@ Object.defineProperty(exports, "__esModule", {
 exports.default = MaterialSnackbar;
 
 /***/ }),
-/* 14 */
+/* 15 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -3891,7 +3956,7 @@ Object.defineProperty(exports, "__esModule", {
 exports.default = MaterialSpinner;
 
 /***/ }),
-/* 15 */
+/* 16 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -4171,7 +4236,7 @@ Object.defineProperty(exports, "__esModule", {
 exports.default = MaterialSwitch;
 
 /***/ }),
-/* 16 */
+/* 17 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -4345,7 +4410,7 @@ Object.defineProperty(exports, "__esModule", {
 exports.default = MaterialTabs;
 
 /***/ }),
-/* 17 */
+/* 18 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -4637,7 +4702,7 @@ Object.defineProperty(exports, "__esModule", {
 exports.default = MaterialTextfield;
 
 /***/ }),
-/* 18 */
+/* 19 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -4700,7 +4765,7 @@ var rAF = function () {
 exports.default = rAF;
 
 /***/ }),
-/* 19 */
+/* 20 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -4866,7 +4931,7 @@ Object.defineProperty(exports, "__esModule", {
 exports.default = MaterialTooltip;
 
 /***/ }),
-/* 20 */
+/* 21 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -4876,7 +4941,7 @@ Object.defineProperty(exports, "__esModule", {
     value: true
 });
 
-var _jokeList = __webpack_require__(21);
+var _jokeList = __webpack_require__(22);
 
 var _jokeList2 = _interopRequireDefault(_jokeList);
 
@@ -4906,14 +4971,14 @@ exports.default = function () {
 }();
 
 /***/ }),
-/* 21 */
+/* 22 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
 
 
 Object.defineProperty(exports, "__esModule", {
-    value: true
+        value: true
 });
 
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
@@ -4922,7 +4987,7 @@ var _joke = __webpack_require__(1);
 
 var _joke2 = _interopRequireDefault(_joke);
 
-var _createElement = __webpack_require__(22);
+var _createElement = __webpack_require__(2);
 
 var _createElement2 = _interopRequireDefault(_createElement);
 
@@ -4935,118 +5000,21 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
 var JokeList = function () {
-    /**
-     * @param {HTMLElement} element
-     */
-    function JokeList(element) {
-        _classCallCheck(this, JokeList);
+        /**
+         * @param {HTMLElement} element
+         */
+        function JokeList(element) {
+                _classCallCheck(this, JokeList);
 
-        this.element = element;
-    }
-
-    /**
-     * adds a joke inside the dom list element
-     * @param {Joke} joke 
-     */
-
-
-    _createClass(JokeList, [{
-        key: 'addJoke',
-        value: function addJoke(joke) {
-            // this is what we are creating
-            // <div class="mdl-card--joke mdl-card mdl-shadow--2dp">
-            //     <div class="mdl-card__title">
-            //         <h2 class="mdl-card__title-text">
-            //             Joke title
-            //         </h2>
-            //     </div>
-            //     <div class="mdl-card__supporting-text">
-            //         Joke text
-            //     </div>
-            //     <div class="mdl-card__actions">
-            //         <div class="mdl-layout-spacer"></div>
-            //         <div>
-            //             Joke votes
-            //         </div>
-            //         <button class="mdl-button mdl-button--icon mdl-js-button mdl-js-ripple-effect">
-            //             <i class="material-icons">tag_faces</i>
-            //         </button>
-            //     </div>
-            //     <div class="mdl-card__menu">
-            //         <button class="mdl-button mdl-button--icon mdl-js-button mdl-js-ripple-effect">
-            //             <i class="material-icons">content_copy</i>
-            //         </button>
-            //     </div>
-            // </div>
-
-            var list = this.element;
-            // <div class="mdl-card mdl-card--joke mdl-shadow--2dp">
-            var card = (0, _createElement2.default)('div', 'mdl-card mdl-card--joke mdl-shadow--2dp');
-            list.appendChild(card);
-
-            // <div class="mdl-card__title">
-            var cardTitle = (0, _createElement2.default)('div', 'mdl-card__title');
-            card.appendChild(cardTitle);
-
-            // <h2 class="mdl-card__title-text">Joke title</h2>
-            var cardTitleText = (0, _createElement2.default)('h2', 'mdl-card__title-text');
-            cardTitleText.innerHTML = joke.title;
-            cardTitle.appendChild(cardTitleText);
-
-            // div class="mdl-card__supporting-text">here goes the joke...</div>
-            var cardSupportingText = (0, _createElement2.default)('div', 'mdl-card__supporting-text');
-            cardSupportingText.innerHTML = joke.text;
-            card.appendChild(cardSupportingText);
-
-            // <div class="mdl-card__actions">
-            var cardActions = (0, _createElement2.default)('div', 'mdl-card__actions');
-            card.appendChild(cardActions);
-
-            // <div class="mdl-layout-spacer"></div>
-            var layoutSpacer = (0, _createElement2.default)('div', 'mdl-layout-spacer');
-            cardActions.appendChild(layoutSpacer);
-
-            // <div>joke_votes</div>
-            var jokeVotes = document.createElement('div');
-            jokeVotes.innerHTML = joke.votes;
-            cardActions.appendChild(jokeVotes);
-
-            // <button class="mdl-button mdl-button--icon mdl-js-button mdl-js-ripple-effect">
-            var smileButton = (0, _createElement2.default)('button', 'mdl-button mdl-button--icon mdl-js-button mdl-js-ripple-effect');
-            cardActions.appendChild(smileButton);
-
-            // <i class="material-icons">tag_faces</i>
-            var smileIcon = (0, _createElement2.default)('i', 'material-icons');
-            smileIcon.innerHTML = 'tag_faces';
-            smileButton.appendChild(smileIcon);
-
-            // <div class="mdl-card__menu">
-            var cardMenu = (0, _createElement2.default)('div', 'mdl-card__menu');
-            card.appendChild(cardMenu);
-
-            // <button class="mdl-button mdl-button--icon mdl-js-button mdl-js-ripple-effect">
-            var copyButton = (0, _createElement2.default)('button', 'mdl-button mdl-button--icon mdl-js-button mdl-js-ripple-effect');
-            cardMenu.appendChild(copyButton);
-
-            // i class="material-icons">content_copy</i>
-            var copyIcon = (0, _createElement2.default)('i', 'material-icons');
-            copyIcon.innerHTML = 'content_copy';
-            copyButton.appendChild(copyIcon);
-
-            _mdlComponentHandler2.default.upgradeElements(smileButton);
-            _mdlComponentHandler2.default.upgradeElements(copyButton);
+                this.element = element;
         }
 
         /**
-        * removes the last joke inside the element joke-list
-        */
+         * adds a joke inside the dom list element
+         * @param {Joke} joke 
+         */
 
-    }, {
-        key: 'removeJoke',
-        value: function removeJoke() {
-            this.element.removeChild(this.element.lastChild);
-        }
-    }]);
+
         _createClass(JokeList, [{
                 key: 'addJoke',
                 value: function addJoke(joke) {
@@ -5106,6 +5074,9 @@ var JokeList = function () {
 
                         // <button class="mdl-button mdl-button--icon mdl-js-button mdl-js-ripple-effect">
                         var copyButton = (0, _createElement2.default)('button', 'mdl-button mdl-button--icon mdl-js-button mdl-js-ripple-effect');
+                        copyButton.addEventListener('click', function () {
+                                return joke.copy();
+                        });
                         cardActions.appendChild(copyButton);
 
                         // i class="material-icons">content_copy</i>
@@ -5116,10 +5087,15 @@ var JokeList = function () {
                         _mdlComponentHandler2.default.upgradeElements(smileButton);
                         _mdlComponentHandler2.default.upgradeElements(copyButton);
                 }
+
+                /**
+                * removes the last joke inside the element joke-list
+                */
+
         }, {
                 key: 'removeJoke',
                 value: function removeJoke() {
-                        // TODO: implement this method
+                        this.element.removeChild(this.element.lastChild);
                 }
         }]);
 
@@ -5127,37 +5103,6 @@ var JokeList = function () {
 }();
 
 exports.default = JokeList;
-
-/***/ }),
-/* 22 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-Object.defineProperty(exports, "__esModule", {
-    value: true
-});
-/**
- * Creates a new html Element
- * @param {string} element 
- * @param {string} className 
- * @returns {HTMLElement}
- */
-function createElement(element, className) {
-    var newElement = document.createElement(element);
-
-    if (className) {
-        var classes = className.split(' ');
-        for (var i = 0; i < classes.length; i++) {
-            newElement.classList.add(classes[i]);
-        }
-    }
-
-    return newElement;
-}
-
-exports.default = createElement;
 
 /***/ }),
 /* 23 */
