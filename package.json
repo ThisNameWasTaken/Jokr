@@ -9,7 +9,9 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "build": "webpack --config webpack.config.js"
+    "webpack": "webpack --config webpack.config.js",
+    "dev-server": "webpack-dev-server",
+    "build": "npm run webpack | npm run dev-server"
   },
   "author": "Dimitrio Mandamadiotis and Dinca Adrian",
   "license": "MIT",
@@ -17,6 +19,7 @@
     "babel-core": "^6.26.0",
     "babel-loader": "^7.1.2",
     "babel-preset-env": "^1.6.1",
-    "webpack": "^3.10.0"
+    "webpack": "^3.10.0",
+    "webpack-dev-server": "^2.11.1"
   }
 }
