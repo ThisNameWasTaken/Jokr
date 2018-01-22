@@ -60,11 +60,94 @@
 /******/ 	__webpack_require__.p = "";
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 3);
+/******/ 	return __webpack_require__(__webpack_require__.s = 0);
 /******/ })
 /************************************************************************/
 /******/ ([
 /* 0 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+var _mdlComponentHandler = __webpack_require__(1);
+
+var _mdlComponentHandler2 = _interopRequireDefault(_mdlComponentHandler);
+
+var _button = __webpack_require__(2);
+
+var _button2 = _interopRequireDefault(_button);
+
+var _checkbox = __webpack_require__(3);
+
+var _checkbox2 = _interopRequireDefault(_checkbox);
+
+var _dataTable = __webpack_require__(4);
+
+var _dataTable2 = _interopRequireDefault(_dataTable);
+
+var _iconToggle = __webpack_require__(5);
+
+var _iconToggle2 = _interopRequireDefault(_iconToggle);
+
+var _layout = __webpack_require__(6);
+
+var _layout2 = _interopRequireDefault(_layout);
+
+var _menu = __webpack_require__(7);
+
+var _menu2 = _interopRequireDefault(_menu);
+
+var _progress = __webpack_require__(8);
+
+var _progress2 = _interopRequireDefault(_progress);
+
+var _radio = __webpack_require__(9);
+
+var _radio2 = _interopRequireDefault(_radio);
+
+var _ripple = __webpack_require__(10);
+
+var _ripple2 = _interopRequireDefault(_ripple);
+
+var _slider = __webpack_require__(11);
+
+var _slider2 = _interopRequireDefault(_slider);
+
+var _snackbar = __webpack_require__(12);
+
+var _snackbar2 = _interopRequireDefault(_snackbar);
+
+var _spinner = __webpack_require__(13);
+
+var _spinner2 = _interopRequireDefault(_spinner);
+
+var _switch = __webpack_require__(14);
+
+var _switch2 = _interopRequireDefault(_switch);
+
+var _tabs = __webpack_require__(15);
+
+var _tabs2 = _interopRequireDefault(_tabs);
+
+var _textfield = __webpack_require__(16);
+
+var _textfield2 = _interopRequireDefault(_textfield);
+
+var _rAF = __webpack_require__(17);
+
+var _rAF2 = _interopRequireDefault(_rAF);
+
+var _tooltip = __webpack_require__(18);
+
+var _tooltip2 = _interopRequireDefault(_tooltip);
+
+__webpack_require__(21);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+/***/ }),
+/* 1 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -572,229 +655,7 @@ window.addEventListener('load', function () {
 exports.default = componentHandler;
 
 /***/ }),
-/* 1 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-Object.defineProperty(exports, "__esModule", {
-    value: true
-});
-
-var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
-
-var _createElement = __webpack_require__(2);
-
-var _createElement2 = _interopRequireDefault(_createElement);
-
-var _mdlComponentHandler = __webpack_require__(0);
-
-var _mdlComponentHandler2 = _interopRequireDefault(_mdlComponentHandler);
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-
-var HIDDEN_INPUT_ID = 'hidden-copy-input';
-var SNACKBAR_ID = "snackbar";
-
-var Joke = function () {
-    /**
-     * @param {string} title
-     * @param {number} votes 
-     */
-    function Joke(text, votes) {
-        _classCallCheck(this, Joke);
-
-        this.text = text;
-        this.votes = votes;
-
-        /** @private we set this input's value to the joke's then copy it */
-        this._hiddenCopyInput = document.getElementById(HIDDEN_INPUT_ID);
-        /** @private used to let the user know they've copied the joke */
-        this._snackBar = document.getElementById(SNACKBAR_ID);
-    }
-
-    // copies a joke's text
-
-
-    _createClass(Joke, [{
-        key: "copy",
-        value: function copy() {
-            if (!this._hiddenCopyInput) {
-                this._createHiddenCopyInput();
-            }
-
-            this._hiddenCopyInput.value = this.text;
-            this._hiddenCopyInput.select();
-            document.execCommand("copy");
-
-            if (!this._snackBar) {
-                this._createSnackbar();
-            }
-
-            this._snackBar.MaterialSnackbar.showSnackbar({
-                message: 'Joke copied to clipboard.'
-            });
-        }
-
-        /** @private creates an input with an id of HIDDEN_INPUT_ID and adds it to the DOM */
-
-    }, {
-        key: "_createHiddenCopyInput",
-        value: function _createHiddenCopyInput() {
-            // <input type="text" id="hidden-copy-input">
-            this._hiddenCopyInput = document.createElement('input');
-            this._hiddenCopyInput.type = "text";
-            this._hiddenCopyInput.id = HIDDEN_INPUT_ID;
-            document.body.appendChild(this._hiddenCopyInput);
-        }
-
-        /** @private creates snackbar with an id of SACKBAR_ID and adds it to the DOM */
-
-    }, {
-        key: "_createSnackbar",
-        value: function _createSnackbar() {
-            // <div id="snackbar" class="mdl-js-snackbar mdl-snackbar">
-            this._snackBar = (0, _createElement2.default)('div', 'mdl-js-snackbar mdl-snackbar');
-            this._snackBar.id = SNACKBAR_ID;
-            document.body.appendChild(this._snackBar);
-
-            // <div class="mdl-snackbar__text"></div>
-            var snackbarText = (0, _createElement2.default)('div', 'mdl-snackbar__text');
-            this._snackBar.appendChild(snackbarText);
-
-            // <button type="button" class="mdl-snackbar__action"></button>
-            var snackbarAction = (0, _createElement2.default)('button', 'mdl-snackbar__action');
-            snackbarAction.type = "button";
-            this._snackBar.appendChild(snackbarAction);
-
-            _mdlComponentHandler2.default.upgradeElements(this._snackBar);
-        }
-    }]);
-
-    return Joke;
-}();
-
-exports.default = Joke;
-
-/***/ }),
 /* 2 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-Object.defineProperty(exports, "__esModule", {
-    value: true
-});
-/**
- * Creates a new html Element
- * @param {string} element 
- * @param {string} className 
- * @returns {HTMLElement}
- */
-function createElement(element, className) {
-    var newElement = document.createElement(element);
-
-    if (className) {
-        var classes = className.split(' ');
-        for (var i = 0; i < classes.length; i++) {
-            newElement.classList.add(classes[i]);
-        }
-    }
-
-    return newElement;
-}
-
-exports.default = createElement;
-
-/***/ }),
-/* 3 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-var _mdlComponentHandler = __webpack_require__(0);
-
-var _mdlComponentHandler2 = _interopRequireDefault(_mdlComponentHandler);
-
-var _button = __webpack_require__(4);
-
-var _button2 = _interopRequireDefault(_button);
-
-var _checkbox = __webpack_require__(5);
-
-var _checkbox2 = _interopRequireDefault(_checkbox);
-
-var _dataTable = __webpack_require__(6);
-
-var _dataTable2 = _interopRequireDefault(_dataTable);
-
-var _iconToggle = __webpack_require__(7);
-
-var _iconToggle2 = _interopRequireDefault(_iconToggle);
-
-var _layout = __webpack_require__(8);
-
-var _layout2 = _interopRequireDefault(_layout);
-
-var _menu = __webpack_require__(9);
-
-var _menu2 = _interopRequireDefault(_menu);
-
-var _progress = __webpack_require__(10);
-
-var _progress2 = _interopRequireDefault(_progress);
-
-var _radio = __webpack_require__(11);
-
-var _radio2 = _interopRequireDefault(_radio);
-
-var _ripple = __webpack_require__(12);
-
-var _ripple2 = _interopRequireDefault(_ripple);
-
-var _slider = __webpack_require__(13);
-
-var _slider2 = _interopRequireDefault(_slider);
-
-var _snackbar = __webpack_require__(14);
-
-var _snackbar2 = _interopRequireDefault(_snackbar);
-
-var _spinner = __webpack_require__(15);
-
-var _spinner2 = _interopRequireDefault(_spinner);
-
-var _switch = __webpack_require__(16);
-
-var _switch2 = _interopRequireDefault(_switch);
-
-var _tabs = __webpack_require__(17);
-
-var _tabs2 = _interopRequireDefault(_tabs);
-
-var _textfield = __webpack_require__(18);
-
-var _textfield2 = _interopRequireDefault(_textfield);
-
-var _rAF = __webpack_require__(19);
-
-var _rAF2 = _interopRequireDefault(_rAF);
-
-var _tooltip = __webpack_require__(20);
-
-var _tooltip2 = _interopRequireDefault(_tooltip);
-
-__webpack_require__(21);
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-/***/ }),
-/* 4 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -931,7 +792,7 @@ Object.defineProperty(exports, "__esModule", {
 exports.default = MaterialButton;
 
 /***/ }),
-/* 5 */
+/* 3 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -1211,7 +1072,7 @@ Object.defineProperty(exports, "__esModule", {
 exports.default = MaterialCheckbox;
 
 /***/ }),
-/* 6 */
+/* 4 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -1396,7 +1257,7 @@ Object.defineProperty(exports, "__esModule", {
 exports.default = MaterialDataTable;
 
 /***/ }),
-/* 7 */
+/* 5 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -1659,7 +1520,7 @@ Object.defineProperty(exports, "__esModule", {
 exports.default = MaterialIconToggle;
 
 /***/ }),
-/* 8 */
+/* 6 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -2226,7 +2087,7 @@ Object.defineProperty(exports, "__esModule", {
 exports.default = MaterialLayout;
 
 /***/ }),
-/* 9 */
+/* 7 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -2705,7 +2566,7 @@ Object.defineProperty(exports, "__esModule", {
 exports.default = MaterialMenu;
 
 /***/ }),
-/* 10 */
+/* 8 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -2834,7 +2695,7 @@ exports.default = MaterialMenu;
 })();
 
 /***/ }),
-/* 11 */
+/* 9 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -3122,7 +2983,7 @@ Object.defineProperty(exports, "__esModule", {
 exports.default = MaterialRadio;
 
 /***/ }),
-/* 12 */
+/* 10 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -3389,7 +3250,7 @@ Object.defineProperty(exports, "__esModule", {
 exports.default = MaterialRipple;
 
 /***/ }),
-/* 13 */
+/* 11 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -3645,7 +3506,7 @@ Object.defineProperty(exports, "__esModule", {
 exports.default = MaterialSlider;
 
 /***/ }),
-/* 14 */
+/* 12 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -3844,7 +3705,7 @@ Object.defineProperty(exports, "__esModule", {
 exports.default = MaterialSnackbar;
 
 /***/ }),
-/* 15 */
+/* 13 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -4003,7 +3864,7 @@ Object.defineProperty(exports, "__esModule", {
 exports.default = MaterialSpinner;
 
 /***/ }),
-/* 16 */
+/* 14 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -4283,7 +4144,7 @@ Object.defineProperty(exports, "__esModule", {
 exports.default = MaterialSwitch;
 
 /***/ }),
-/* 17 */
+/* 15 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -4457,7 +4318,7 @@ Object.defineProperty(exports, "__esModule", {
 exports.default = MaterialTabs;
 
 /***/ }),
-/* 18 */
+/* 16 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -4749,7 +4610,7 @@ Object.defineProperty(exports, "__esModule", {
 exports.default = MaterialTextfield;
 
 /***/ }),
-/* 19 */
+/* 17 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -4812,7 +4673,7 @@ var rAF = function () {
 exports.default = rAF;
 
 /***/ }),
-/* 20 */
+/* 18 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -4978,6 +4839,145 @@ Object.defineProperty(exports, "__esModule", {
 exports.default = MaterialTooltip;
 
 /***/ }),
+/* 19 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+    value: true
+});
+
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+var _createElement = __webpack_require__(20);
+
+var _createElement2 = _interopRequireDefault(_createElement);
+
+var _mdlComponentHandler = __webpack_require__(1);
+
+var _mdlComponentHandler2 = _interopRequireDefault(_mdlComponentHandler);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+var HIDDEN_INPUT_ID = 'hidden-copy-input';
+var SNACKBAR_ID = "snackbar";
+
+var Joke = function () {
+    /**
+     * @param {string} title
+     * @param {number} votes 
+     */
+    function Joke(text, votes) {
+        _classCallCheck(this, Joke);
+
+        this.text = text;
+        this.votes = votes;
+
+        /** @private we set this input's value to the joke's then copy it */
+        this._hiddenCopyInput = document.getElementById(HIDDEN_INPUT_ID);
+        /** @private used to let the user know they've copied the joke */
+        this._snackBar = document.getElementById(SNACKBAR_ID);
+    }
+
+    // copies a joke's text
+
+
+    _createClass(Joke, [{
+        key: "copy",
+        value: function copy() {
+            if (!this._hiddenCopyInput) {
+                this._createHiddenCopyInput();
+            }
+
+            this._hiddenCopyInput.value = this.text;
+            this._hiddenCopyInput.select();
+            document.execCommand("copy");
+
+            if (!this._snackBar) {
+                this._createSnackbar();
+            }
+
+            this._snackBar.MaterialSnackbar.showSnackbar({
+                message: 'Joke copied to clipboard.'
+            });
+        }
+
+        /** @private creates an input with an id of HIDDEN_INPUT_ID and adds it to the DOM */
+
+    }, {
+        key: "_createHiddenCopyInput",
+        value: function _createHiddenCopyInput() {
+            // <input type="text" id="hidden-copy-input">
+            this._hiddenCopyInput = document.createElement('input');
+            this._hiddenCopyInput.type = "text";
+            this._hiddenCopyInput.id = HIDDEN_INPUT_ID;
+            document.body.appendChild(this._hiddenCopyInput);
+        }
+
+        /** @private creates snackbar with an id of SACKBAR_ID and adds it to the DOM */
+
+    }, {
+        key: "_createSnackbar",
+        value: function _createSnackbar() {
+            // <div id="snackbar" class="mdl-js-snackbar mdl-snackbar">
+            this._snackBar = (0, _createElement2.default)('div', 'mdl-js-snackbar mdl-snackbar');
+            this._snackBar.id = SNACKBAR_ID;
+            document.body.appendChild(this._snackBar);
+
+            // <div class="mdl-snackbar__text"></div>
+            var snackbarText = (0, _createElement2.default)('div', 'mdl-snackbar__text');
+            this._snackBar.appendChild(snackbarText);
+
+            // <button type="button" class="mdl-snackbar__action"></button>
+            var snackbarAction = (0, _createElement2.default)('button', 'mdl-snackbar__action');
+            snackbarAction.type = "button";
+            this._snackBar.appendChild(snackbarAction);
+
+            _mdlComponentHandler2.default.upgradeElements(this._snackBar);
+        }
+    }]);
+
+    return Joke;
+}();
+
+exports.default = Joke;
+
+/***/ }),
+/* 20 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+    value: true
+});
+/**
+ * Creates a new html Element
+ * @param {string} element 
+ * @param {string} className 
+ * @returns {HTMLElement}
+ */
+function createElement(element, className) {
+    var newElement = document.createElement(element);
+
+    if (className) {
+        var classes = className.split(' ');
+        for (var i = 0; i < classes.length; i++) {
+            newElement.classList.add(classes[i]);
+        }
+    }
+
+    return newElement;
+}
+
+exports.default = createElement;
+
+/***/ }),
 /* 21 */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -4992,7 +4992,7 @@ var _jokeList = __webpack_require__(22);
 
 var _jokeList2 = _interopRequireDefault(_jokeList);
 
-var _joke = __webpack_require__(1);
+var _joke = __webpack_require__(19);
 
 var _joke2 = _interopRequireDefault(_joke);
 
@@ -5030,15 +5030,15 @@ Object.defineProperty(exports, "__esModule", {
 
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
-var _joke = __webpack_require__(1);
+var _joke = __webpack_require__(19);
 
 var _joke2 = _interopRequireDefault(_joke);
 
-var _createElement = __webpack_require__(2);
+var _createElement = __webpack_require__(20);
 
 var _createElement2 = _interopRequireDefault(_createElement);
 
-var _mdlComponentHandler = __webpack_require__(0);
+var _mdlComponentHandler = __webpack_require__(1);
 
 var _mdlComponentHandler2 = _interopRequireDefault(_mdlComponentHandler);
 
