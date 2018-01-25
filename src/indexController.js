@@ -6,22 +6,11 @@ export default class IndexController {
         this._container = container;
         this._jokeList = new JokeList(container);
 
-        // TODO: turn this code block into a function
-        const JOKE_FETCH_COUNT = 10;
-
-        for (let i = 0; i < JOKE_FETCH_COUNT; i++) {
-            this._fetchJoke().then(response => this._jokeList.addJoke(
-                new Joke(
-                    response,
-                    Math.floor(Math.random() * 999)
-                )
-            ));
-        }
-        // end of the code block
+        this._fetchJokesFromNetwork();
     }
 
     /**
-     * Fetches a random joke or a specific one if an id is passed as an argument
+     * @private Fetches a random joke or a specific one if an id is passed as an argument
      * @param {string|number} id - joke's id
      * @param {string} url - the url from which the joke can be fetched
      */
@@ -35,5 +24,20 @@ export default class IndexController {
                 .then(response => response.json())
                 .then(response => resolve(response.value));
         });
+    }
+
+    /**
+     * @private Fetches a given number of jokes jokes from the network
+     * @param {number} numOfJokes - the number of jokes which must be fetched (10 by default)
+     */
+    _fetchJokesFromNetwork(numOfJokes = 10) {
+        for (let i = 0; i < numOfJokes; i++) {
+            this._fetchJoke().then(response => this._jokeList.addJoke(
+                new Joke(
+                    response,
+                    Math.floor(Math.random() * 999)
+                )
+            ));
+        }
     }
 }
