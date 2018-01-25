@@ -1,26 +1,7 @@
 const path = require('path');
-const UglifyJsPlugin = require('uglifyjs-webpack-plugin');
+const BabiliPlugin = require('babili-webpack-plugin');
 
 const bundleConfig = {
-    entry: './src/index.js',
-    output: {
-        path: path.resolve(__dirname, 'dist'),
-        filename: 'jokr.bundle.js'
-    },
-    module: {
-        rules: [
-            { test: /\.js$/, exclude: /node_modules/, loader: "babel-loader" }
-        ]
-    },
-    watch: true,
-    watchOptions: {
-        aggregateTimeout: 300,
-        poll: 1000,
-        ignored: /node_modules/
-    }
-};
-
-const minifiedBundleConfig = {
     entry: './src/index.js',
     output: {
         path: path.resolve(__dirname, 'dist'),
@@ -32,9 +13,12 @@ const minifiedBundleConfig = {
         ]
     },
     plugins: [
-        new UglifyJsPlugin({
-            test: /\.min\.js$/,
-            exclude: /node_modules/
+        new BabiliPlugin({}, {
+            test: /\.js$/,
+            exclude: /node_modules/,
+            comments: false,
+            babel: require("babel-core"),
+            babili: require("babel-preset-babili")
         })
     ],
     watch: true,
@@ -45,4 +29,4 @@ const minifiedBundleConfig = {
     }
 };
 
-module.exports = [bundleConfig, minifiedBundleConfig];
+module.exports = [bundleConfig];
