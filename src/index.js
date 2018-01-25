@@ -16,5 +16,6 @@ import MaterialTabs from './tabs/tabs';
 import MaterialTextfield from './textfield/textfield';
 import rAF from './third_party/rAF';
 import MaterialTooltip from './tooltip/tooltip';
+import IndexController from './indexController';
 
-import './jokePrinter/jokePrinter';
+new IndexController(document.getElementById('joke-list'))
