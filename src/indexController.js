@@ -6,7 +6,20 @@ export default class IndexController {
         this._container = container;
         this._jokeList = new JokeList(container);
 
+        this._registerServiceWorker();
         this._fetchJokesFromNetwork();
+    }
+
+    _registerServiceWorker() {
+        if (!navigator.serviceWorker) {
+            return;
+        }
+
+        navigator.serviceWorker.register('/sw.js').then(function () {
+            console.log('SW registered!');
+        }).catch(function () {
+            console.log('SW did NOT register! :/');
+        });
     }
 
     /**
