@@ -616,7 +616,8 @@ textarea {
 /* Remove the unwanted box around FAB buttons */
 /* More info: http://goo.gl/IPwKi */
 a, .mdl-accordion, .mdl-button, .mdl-card, .mdl-checkbox, .mdl-dropdown-menu,
-.mdl-icon-toggle, .mdl-item, .mdl-radio, .mdl-slider, .mdl-switch, .mdl-tabs__tab {
+.mdl-icon-toggle, .mdl-item, .mdl-radio, .mdl-slider, .mdl-switch, .mdl-tabs__tab,
+.mdl-layout__drawer-button, .mdl-snackbar__action, .material-icons {
   -webkit-tap-highlight-color: transparent;
   -webkit-tap-highlight-color: rgba(255, 255, 255, 0);
 }
@@ -8432,6 +8433,7 @@ fieldset[disabled] .mdl-checkbox .mdl-checkbox__ripple-container .mdl-ripple,
   height: 48px;
   width: 48px;
   border: 0;
+  outline: none;
   flex-shrink: 0;
   overflow: hidden;
   text-align: center;
@@ -9889,8 +9891,8 @@ _:-ms-input-placeholder, :root .mdl-slider.mdl-slider.is-upgraded {
 /* Dialog */
 .mdl-snackbar {
   position: fixed;
+  left: 0;
   bottom: 0;
-  left: 50%;
   cursor: default;
   background-color: #323232;
   z-index: 3;
@@ -9902,14 +9904,13 @@ _:-ms-input-placeholder, :root .mdl-slider.mdl-slider.is-upgraded {
   transform: translate(0, 80px);
   transition: transform 0.25s cubic-bezier(0.4, 0, 1, 1);
   pointer-events: none;
+  min-height: 48px;
+  max-height: 80px;
 }
 
 @media (max-width: 479px) {
   .mdl-snackbar {
     width: 100%;
-    left: 0;
-    min-height: 48px;
-    max-height: 80px;
   }
 }
 
@@ -9918,7 +9919,9 @@ _:-ms-input-placeholder, :root .mdl-slider.mdl-slider.is-upgraded {
     min-width: 288px;
     max-width: 568px;
     border-radius: 2px;
-    transform: translate(-50%, 80px);
+    transform: translate(0, 80px);
+    bottom: 16px;
+    left: 16px;
   }
 }
 
@@ -9928,17 +9931,16 @@ _:-ms-input-placeholder, :root .mdl-slider.mdl-slider.is-upgraded {
   transition: transform 0.25s cubic-bezier(0, 0, 0.2, 1);
 }
 
-@media (min-width: 480px) {
-  .mdl-snackbar--active {
-    transform: translate(-50%, 0);
-  }
-}
-
 .mdl-snackbar__text {
   padding: 14px 12px 14px 24px;
   vertical-align: middle;
   color: white;
   float: left;
+}
+
+.mdl-snackbar__actions {
+  display: flex;
+  padding: 0 12px;
 }
 
 .mdl-snackbar__action {
@@ -9947,7 +9949,7 @@ _:-ms-input-placeholder, :root .mdl-slider.mdl-slider.is-upgraded {
   color: rgb(255,64,129);
   float: right;
   text-transform: uppercase;
-  padding: 14px 24px 14px 12px;
+  padding: 14px 12px;
   font-family: "Roboto", "Helvetica", "Arial", sans-serif;
   font-size: 14px;
   font-weight: 500;
