@@ -1,5 +1,6 @@
 import JokeList from './jokeList/jokeList';
 import Joke from './joke/joke';
+import idb from './idb';
 
 export default class IndexController {
     constructor(container) {
@@ -7,7 +8,18 @@ export default class IndexController {
         this._jokeList = new JokeList(container);
 
         this._registerServiceWorker();
+        this._idb = this._openDatabase();
         this._fetchJokesFromNetwork();
+    }
+
+    _openDatabase() {
+        if (!navigator.serviceWorker) {
+            return Promise.resolve();
+        }
+
+        return idb.open('jokr', 1, upgradeDb => {
+            upgradeDb.createObjectStore('jokes');
+        });
     }
 
     _registerServiceWorker() {
@@ -32,11 +44,14 @@ export default class IndexController {
             url += id;
         }
 
-        return new Promise((resolve, reject) => {
-            fetch(url)
+        return new Promise(
+            (resolve, reject) => fetch(url)
                 .then(response => response.json())
-                .then(response => resolve(response.value));
-        });
+                .then(response => {
+                    this._idb.then(db => db.transaction('jokes', 'readwrite').objectStore('jokes').put(response.value, response.id));
+                    resolve(response.value);
+                })
+        );
     }
 
     /**
