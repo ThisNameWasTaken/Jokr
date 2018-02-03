@@ -71,7 +71,7 @@ class JokeList {
 
         // <button class="mdl-button mdl-button--icon mdl-js-button mdl-js-ripple-effect">
         let copyButton = createElement('button', 'mdl-button mdl-button--icon mdl-js-button mdl-js-ripple-effect');
-        copyButton.addEventListener('click', () => joke.copy());
+        copyButton.addEventListener('click', joke.copyToClipboard.bind(joke));
         cardActions.appendChild(copyButton);
 
         // i class="material-icons">content_copy</i>

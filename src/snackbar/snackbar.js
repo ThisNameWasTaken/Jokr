@@ -27,7 +27,9 @@
   var MaterialSnackbar = function MaterialSnackbar(element) {
     this.element_ = element;
     this.textElement_ = this.element_.querySelector('.' + this.cssClasses_.MESSAGE);
-    this.actionElement_ = this.element_.querySelector('.' + this.cssClasses_.ACTION);
+    var actionElements = this.element_.querySelectorAll('.' + this.cssClasses_.ACTION);
+    this.actionElement_ = actionElements[0];
+    this.secondaryActionElement_ = actionElements[1];
     if (!this.textElement_) {
       throw new Error('There must be a message element for a snackbar.');
     }
@@ -36,10 +38,15 @@
     }
     this.active = false;
     this.actionHandler_ = undefined;
+    this.secondaryActionHandler = undefined;
     this.message_ = undefined;
     this.actionText_ = undefined;
+    this.secondaryActionText_ = undefined;
     this.queuedNotifications_ = [];
-    this.setActionHidden_(true);
+    this.setActionHidden_(this.actionElement_, true);
+    if (this.secondaryActionElement_) {
+      this.setActionHidden_(this.secondaryActionElement_, true);
+    }
   };
   window['MaterialSnackbar'] = MaterialSnackbar;
 
@@ -79,15 +86,32 @@
 
     if (this.actionHandler_) {
       this.actionElement_.textContent = this.actionText_;
-      this.actionElement_.addEventListener('click', this.actionHandler_);
-      this.setActionHidden_(false);
+      this.actionElement_.addEventListener('click', function () {
+        this.actionHandler_();
+        clearTimeout(this.cleanupTimeout_);
+        this.cleanup_();
+      }.bind(this));
+      this.setActionHidden_(this.actionElement_, false);
+    }
+
+    if (!this.secondaryActionText_ && this.secondaryActionElement_) {
+      this.secondaryActionElement_.setAttribute('hidden', 'true');
+    }
+
+    if (this.secondaryActionHandler_) {
+      this.secondaryActionElement_.textContent = this.secondaryActionText_;
+      this.secondaryActionElement_.addEventListener('click', function () {
+        this.secondaryActionHandler_();
+        clearTimeout(this.cleanupTimeout_);
+        this.cleanup_();
+      }.bind(this));
+      this.setActionHidden_(this.secondaryActionElement_, false);
     }
 
     this.textElement_.textContent = this.message_;
     this.element_.classList.add(this.cssClasses_.ACTIVE);
     this.element_.setAttribute('aria-hidden', 'false');
-    setTimeout(this.cleanup_.bind(this), this.timeout_);
-
+    this.cleanupTimeout_ = setTimeout(this.cleanup_.bind(this), this.timeout_);
   };
 
   /**
@@ -120,8 +144,14 @@
       if (data['actionHandler']) {
         this.actionHandler_ = data['actionHandler'];
       }
+      if (data['secondaryActionHandler']) {
+        this.secondaryActionHandler_ = data['secondaryActionHandler'];
+      }
       if (data['actionText']) {
         this.actionText_ = data['actionText'];
+      }
+      if (data['secondaryActionText']) {
+        this.secondaryActionText_ = data['secondaryActionText'];
       }
       this.displaySnackbar_();
     }
@@ -151,13 +181,20 @@
       this.element_.setAttribute('aria-hidden', 'true');
       this.textElement_.textContent = '';
       if (!Boolean(this.actionElement_.getAttribute('aria-hidden'))) {
-        this.setActionHidden_(true);
+        this.setActionHidden_(this.actionElement_, true);
         this.actionElement_.textContent = '';
         this.actionElement_.removeEventListener('click', this.actionHandler_);
       }
+      if (this.secondaryActionElement_ && !Boolean(this.secondaryActionElement_.getAttribute('aria-hidden'))) {
+        this.setActionHidden_(this.secondaryActionElement_, true);
+        this.secondaryActionElement_.textContent = '';
+        this.secondaryActionElement_.removeEventListener('click', this.secondaryActionHandler_);
+      }
       this.actionHandler_ = undefined;
+      this.secondaryActionHandler_ = undefined;
       this.message_ = undefined;
       this.actionText_ = undefined;
+      this.secondaryActionText_ = undefined;
       this.active = false;
       this.checkQueue_();
     }.bind(this), /** @type {number} */(this.Constant_.ANIMATION_LENGTH));
@@ -169,11 +206,11 @@
    * @param {boolean} value
    * @private
    */
-  MaterialSnackbar.prototype.setActionHidden_ = function (value) {
+  MaterialSnackbar.prototype.setActionHidden_ = function (actionElement, value) {
     if (value) {
-      this.actionElement_.setAttribute('aria-hidden', 'true');
+      actionElement.setAttribute('aria-hidden', 'true');
     } else {
-      this.actionElement_.removeAttribute('aria-hidden');
+      actionElement.removeAttribute('aria-hidden');
     }
   };
 
