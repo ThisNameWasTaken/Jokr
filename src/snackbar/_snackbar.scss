@@ -19,8 +19,8 @@
 
 .mdl-snackbar {
   position: fixed;
+  left: 0;
   bottom: 0;
-  left: 50%;
   cursor: default;
   background-color: $snackbar-background-color;
   z-index: 3;
@@ -32,26 +32,26 @@
   transform: translate(0, 80px);
   transition: transform 0.25s $animation-curve-fast-out-linear-in;
   pointer-events: none;
+  min-height: 48px;
+  max-height: 80px;
+
   @media(max-width: $snackbar-tablet-breakpoint - 1) {
     width: 100%;
-    left: 0;
-    min-height: 48px;
-    max-height: 80px;
   }
+
   @media(min-width: $snackbar-tablet-breakpoint) {
     min-width: 288px;
     max-width: 568px;
     border-radius: 2px;
-    transform: translate(-50%, 80px);
+    transform: translate(0, 80px);
+    bottom: 16px;
+    left: 16px;
   }
+
   &--active {
     transform: translate(0, 0);
     pointer-events: auto;
     transition: transform 0.25s $animation-curve-linear-out-slow-in;
-
-    @media(min-width: $snackbar-tablet-breakpoint) {
-      transform: translate(-50%, 0);
-    }
   }
 
   &__text {
@@ -61,13 +61,18 @@
     float: left;
   }
 
+  &__actions {
+    display: flex;
+    padding: 0 12px;
+  }
+
   &__action {
     background: transparent;
     border: none;
     color: $snackbar-action-color;
     float: right;
     text-transform: uppercase;
-    padding: 14px 24px 14px 12px;
+    padding: 14px 12px;
     @include typo-button();
     overflow: hidden;
     outline: none;
