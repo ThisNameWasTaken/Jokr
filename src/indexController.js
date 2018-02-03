@@ -1,5 +1,6 @@
 import JokeList from './jokeList/jokeList';
 import Joke from './joke/joke';
+import snackbarView from './snackbarView/snackbarView';
 import idb from './idb';
 
 export default class IndexController {
@@ -27,11 +28,44 @@ export default class IndexController {
             return;
         }
 
-        navigator.serviceWorker.register('/sw.js').then(function () {
-            console.log('SW registered!');
-        }).catch(function () {
-            console.log('SW did NOT register! :/');
+        navigator.serviceWorker.register('/sw.js').then(reg => {
+            if (!navigator.serviceWorker.controller) {
+                return;
+            }
+
+            if (reg.waiting) {
+                reg.waiting.postMessage({ action: 'skipWaiting' });
+                return;
+            }
+
+            if (reg.installing) {
+                this._requestUpdateOnStateChange(reg);
+                return;
+            }
+
+            reg.addEventListener('updatefound', () => this._requestUpdateOnStateChange(reg));
         });
+
+        navigator.serviceWorker.addEventListener('controllerchange', () => location.reload());
+    }
+
+    /**
+     * @private Sends a notification to the user that there is an update available and updates the app if the user choses to do so
+     * @param {ServiceWorkerRegistration} reg
+     */
+    _requestUpdateOnStateChange(reg) {
+        reg.installing.addEventListener('statechange', function () {
+            if (this.state == 'installed') {
+                snackbarView.showSnackbar({
+                    message: 'Update available!',
+                    timeout: 86400000,
+                    actionHandler: () => { this.postMessage({ action: 'skipWaiting' }); },
+                    actionText: 'Update!',
+                    secondaryActionHandler: function () { },
+                    secondaryActionText: 'No thanks!',
+                });
+            }
+        })
     }
 
     /**
