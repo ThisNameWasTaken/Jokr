@@ -6,14 +6,17 @@ const HIDDEN_INPUT_ID = 'hidden-copy-input';
 
 export default class Joke {
     /**
-     * @param {string} title
-     * @param {number} likes 
+     * @param {Object} jokeData
+     * @param {string} jokeData.id
+     * @param {string} jokeData.title
+     * @param {number} jokeData.likes
+     * @param {boolean} jokeData.likedByUser
      */
-    constructor(id, text, likes, likedByUser) {
-        this.id = id;
-        this.text = text;
-        this.likes = likes;
-        this.likedByUser = likedByUser;
+    constructor(jokeData = { id, text, likes, likedByUser: false }) {
+        this.id = jokeData.id;
+        this.text = jokeData.text;
+        this.likes = jokeData.likes;
+        this.likedByUser = jokeData.likedByUser;
 
         /** @private we set this input's value to the joke's then copy it */
         this._hiddenCopyInput = document.getElementById(HIDDEN_INPUT_ID);
