@@ -18,4 +18,4 @@ import rAF from './third_party/rAF';
 import MaterialTooltip from './tooltip/tooltip';
 import IndexController from './indexController';
 
-new IndexController(document.getElementById('joke-list'))
+new IndexController(document.getElementById('latest-jokes'))
