@@ -18,9 +18,7 @@ export default class IndexController {
             return Promise.resolve();
         }
 
-        return idb.open('jokr', 1, upgradeDb => {
-            upgradeDb.createObjectStore('jokes');
-        });
+        return idb.open('jokr', 1, upgradeDb => upgradeDb.createObjectStore('jokes'));
     }
 
     _registerServiceWorker() {
@@ -73,7 +71,7 @@ export default class IndexController {
      * @param {string|number} id - joke's id
      * @param {string} url - the url from which the joke can be fetched
      */
-    _fetchJoke(id, url = 'https://api.chucknorris.io/jokes/random') {
+    _fetchJoke(id = 'random', url = 'https://api.chucknorris.io/jokes/') {
         if (id) {
             url += id;
         }
