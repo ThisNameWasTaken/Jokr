@@ -11,10 +11,15 @@ export default class JokeList {
     }
 
     /**
-     * adds a joke inside the dom list element
-     * @param {Joke} joke 
+     * adds a joke to the jokeView
+     * @param {Object} jokeData
+     * @param {string} jokeData.id
+     * @param {string} jokeData.title
+     * @param {number} jokeData.likes
+     * @param {boolean} jokeData.likedByUser
      */
-    addJoke(joke) {
+    addJoke(jokeData = { id, text, likes, likedByUser: false }) {
+        let joke = new Joke(jokeData);
         // this is what we are creating
         // <div class="mdl-card--joke mdl-card mdl-shadow--2dp">
         //     <div class="mdl-card__supporting-text">
