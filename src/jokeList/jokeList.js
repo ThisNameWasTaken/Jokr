@@ -2,7 +2,7 @@ import Joke from './../joke/joke';
 import createElement from './../createElement/createElement';
 import componentHandler from './../mdlComponentHandler';
 
-class JokeList {
+export default class JokeList {
     /**
      * @param {HTMLElement} element
      */
@@ -31,9 +31,10 @@ class JokeList {
         //             <i class="material-icons">tag_faces</i>
         //         </button>
 
-        //         <button class="mdl-button mdl-button--icon mdl-js-button mdl-js-ripple-effect">
-        //             <i class="material-icons">content_copy</i>
-        //         </button>
+        //          <label class="mdl-icon-toggle mdl-js-icon-toggle mdl-js-ripple-effect" for="JOKE_ID">
+        //              <input type="checkbox" id="JOKE_ID" class="mdl-icon-toggle__input" checked>
+        //              <i class="mdl-icon-toggle__label material-icons">content_copy</i>
+        //          </label>
         //     </div>
         // </div>
 
@@ -56,18 +57,30 @@ class JokeList {
         cardActions.appendChild(layoutSpacer);
 
         // <div>joke_votes</div>
-        let jokeVotes = document.createElement('div');
-        jokeVotes.innerHTML = joke.votes;
-        cardActions.appendChild(jokeVotes);
+        let jokeLikes = document.createElement('div');
+        jokeLikes.innerHTML = joke.likes;
+        cardActions.appendChild(jokeLikes);
 
-        // <button class="mdl-button mdl-button--icon mdl-js-button mdl-js-ripple-effect">
-        let smileButton = createElement('button', 'mdl-button mdl-button--icon mdl-js-button mdl-js-ripple-effect');
-        cardActions.appendChild(smileButton);
+        // <label class="mdl-icon-toggle mdl-js-icon-toggle mdl-js-ripple-effect" for="JOKE_ID">
+        let likeToggleLabel = createElement('label', 'mdl-icon-toggle mdl-js-icon-toggle mdl-js-ripple-effect');
+        likeToggleLabel.setAttribute('for', `joke-${joke.id}`);
+        cardActions.appendChild(likeToggleLabel);
+
+        // <input type="checkbox" id="JOKE_ID" class="mdl-icon-toggle__input" checked>
+        let likeInput = createElement('input', 'mdl-icon-toggle__input');
+        likeInput.type = 'checkbox';
+        likeInput.id = `joke-${joke.id}`;
+        likeInput.checked = joke.likedByUser;
+        likeInput.addEventListener('click', function () {
+            joke.toggleLike();
+            jokeLikes.innerHTML = joke.likes;
+        });
+        likeToggleLabel.appendChild(likeInput);
 
         // <i class="material-icons">tag_faces</i>
-        let smileIcon = createElement('i', 'material-icons');
-        smileIcon.innerHTML = 'tag_faces';
-        smileButton.appendChild(smileIcon);
+        let likeIcon = createElement('i', 'mdl-icon-toggle__label material-icons');
+        likeIcon.innerHTML = 'tag_faces';
+        likeToggleLabel.appendChild(likeIcon);
 
         // <button class="mdl-button mdl-button--icon mdl-js-button mdl-js-ripple-effect">
         let copyButton = createElement('button', 'mdl-button mdl-button--icon mdl-js-button mdl-js-ripple-effect');
@@ -79,7 +92,7 @@ class JokeList {
         copyIcon.innerHTML = 'content_copy';
         copyButton.appendChild(copyIcon);
 
-        componentHandler.upgradeElements(smileButton);
+        componentHandler.upgradeElements(likeToggleLabel);
         componentHandler.upgradeElements(copyButton);
     }
 
@@ -90,5 +103,3 @@ class JokeList {
         this.element.removeChild(this.element.lastChild);
     }
 }
-
-export default JokeList;

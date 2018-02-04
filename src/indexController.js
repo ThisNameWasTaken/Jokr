@@ -18,7 +18,7 @@ export default class IndexController {
             return Promise.resolve();
         }
 
-        return idb.open('jokr', 1, upgradeDb => upgradeDb.createObjectStore('jokes'));
+        return idb.open('jokr', 1, upgradeDb => upgradeDb.createObjectStore('jokes', { keyPath: 'id' }));
     }
 
     _registerServiceWorker() {
@@ -32,6 +32,7 @@ export default class IndexController {
             }
 
             if (reg.waiting) {
+                // if there is a sw already waiting then update since the user did not yet interact with the page
                 reg.waiting.postMessage({ action: 'skipWaiting' });
                 return;
             }
@@ -56,7 +57,7 @@ export default class IndexController {
             if (this.state == 'installed') {
                 snackbarView.showSnackbar({
                     message: 'Update available!',
-                    timeout: 86400000,
+                    timeout: 86400000, // 24h
                     actionHandler: () => { this.postMessage({ action: 'skipWaiting' }); },
                     actionText: 'Update!',
                     secondaryActionHandler: function () { },
@@ -70,6 +71,7 @@ export default class IndexController {
      * @private Fetches a random joke or a specific one if an id is passed as an argument
      * @param {string|number} id - joke's id
      * @param {string} url - the url from which the joke can be fetched
+     * @returns {object}
      */
     _fetchJoke(id = 'random', url = 'https://api.chucknorris.io/jokes/') {
         if (id) {
@@ -80,8 +82,14 @@ export default class IndexController {
             (resolve, reject) => fetch(url)
                 .then(response => response.json())
                 .then(response => {
-                    this._idb.then(db => db.transaction('jokes', 'readwrite').objectStore('jokes').put(response.value, response.id));
-                    resolve(response.value);
+                    const jokeData = {
+                        id: response.id,
+                        text: response.value,
+                        likes: Math.floor(Math.random() * 999),
+                        likedByUser: false
+                    }
+                    this._idb.then(db => db.transaction('jokes', 'readwrite').objectStore('jokes').put(jokeData));
+                    resolve(jokeData);
                 })
         );
     }
@@ -92,10 +100,12 @@ export default class IndexController {
      */
     _fetchJokesFromNetwork(numOfJokes = 10) {
         for (let i = 0; i < numOfJokes; i++) {
-            this._fetchJoke().then(response => this._jokeList.addJoke(
+            this._fetchJoke().then(jokeData => this._jokeList.addJoke(
                 new Joke(
-                    response,
-                    Math.floor(Math.random() * 999)
+                    jokeData.id,
+                    jokeData.text,
+                    jokeData.likes,
+                    jokeData.likedByUser
                 )
             ));
         }
