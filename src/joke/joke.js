@@ -4,14 +4,19 @@ import snackbarView from "./../snackbarView/snackbarView"
 
 const HIDDEN_INPUT_ID = 'hidden-copy-input';
 
-class Joke {
+export default class Joke {
     /**
-     * @param {string} title
-     * @param {number} votes 
+     * @param {Object} jokeData
+     * @param {string} jokeData.id
+     * @param {string} jokeData.title
+     * @param {number} jokeData.likes
+     * @param {boolean} jokeData.likedByUser
      */
-    constructor(text, votes) {
-        this.text = text;
-        this.votes = votes;
+    constructor(jokeData = { id, text, likes, likedByUser: false }) {
+        this.id = jokeData.id;
+        this.text = jokeData.text;
+        this.likes = jokeData.likes;
+        this.likedByUser = jokeData.likedByUser;
 
         /** @private we set this input's value to the joke's then copy it */
         this._hiddenCopyInput = document.getElementById(HIDDEN_INPUT_ID);
@@ -27,9 +32,13 @@ class Joke {
         this._hiddenCopyInput.select();
         document.execCommand("copy");
 
-        snackbarView.showSnackbar({
-            message: 'Joke copied to clipboard.'
-        });
+        snackbarView.showSnackbar({ message: 'Joke copied to clipboard.' });
+    }
+
+    toggleLike() {
+        // TODO: update the cache and the database
+        this.likedByUser ? this.likes-- : this.likes++;
+        this.likedByUser = !this.likedByUser;
     }
 
     /** @private creates an input with an id of HIDDEN_INPUT_ID and adds it to the DOM */
@@ -41,5 +50,3 @@ class Joke {
         document.body.appendChild(this._hiddenCopyInput);
     }
 }
-
-export default Joke;
