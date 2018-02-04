@@ -1,12 +1,11 @@
-import JokeList from './jokeList/jokeList';
-import Joke from './joke/joke';
+import JokeView from './jokeView/jokeView';
 import snackbarView from './snackbarView/snackbarView';
 import idb from './idb';
 
 export default class IndexController {
     constructor(container) {
         this._container = container;
-        this._jokeList = new JokeList(container);
+        this._jokeView = new JokeView(container);
 
         this._registerServiceWorker();
         this._idb = this._openDatabase();
@@ -100,14 +99,7 @@ export default class IndexController {
      */
     _fetchJokesFromNetwork(numOfJokes = 10) {
         for (let i = 0; i < numOfJokes; i++) {
-            this._fetchJoke().then(jokeData => this._jokeList.addJoke(
-                new Joke(
-                    jokeData.id,
-                    jokeData.text,
-                    jokeData.likes,
-                    jokeData.likedByUser
-                )
-            ));
+            this._fetchJoke().then(jokeData => this._jokeView.addJoke(jokeData));
         }
     }
 }
