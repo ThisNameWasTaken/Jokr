@@ -10,6 +10,7 @@ export default class IndexController {
         this._registerServiceWorker();
         this._idb = this._openDatabase();
         this._fetchJokesFromNetwork();
+        this._fetchJokesOnScrollBottom();
     }
 
     _openDatabase() {
@@ -101,5 +102,19 @@ export default class IndexController {
         for (let i = 0; i < numOfJokes; i++) {
             this._fetchJoke().then(jokeData => this._jokeView.addJoke(jokeData));
         }
+    }
+
+    /**
+     * @private Fetches a given number of jokes jokes from the network
+     * when the user scrolled to the bottom of the page
+     * @param {number} numOfJokes - the number of jokes which must be fetched (10 by default)
+     */
+    _fetchJokesOnScrollBottom(numOfJokes = 10) {
+        const layoutContent = document.getElementsByClassName('mdl-layout__content')[0];
+        layoutContent.addEventListener('scroll', () => {
+            if (layoutContent.scrollTop + layoutContent.clientHeight >= layoutContent.scrollHeight) {
+                this._fetchJokesFromNetwork(numOfJokes);
+            }
+        });
     }
 }
