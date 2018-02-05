@@ -13,7 +13,7 @@ export default class JokeList {
     /**
      * adds a joke to the jokeView
      * @param {Object} jokeData
-     * @param {string} jokeData.id
+     * @param {string|number} jokeData.id
      * @param {string} jokeData.title
      * @param {number} jokeData.likes
      * @param {boolean} jokeData.likedByUser
