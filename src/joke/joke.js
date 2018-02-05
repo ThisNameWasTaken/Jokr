@@ -7,7 +7,7 @@ const HIDDEN_INPUT_ID = 'hidden-copy-input';
 export default class Joke {
     /**
      * @param {Object} jokeData
-     * @param {string} jokeData.id
+     * @param {string|number} jokeData.id
      * @param {string} jokeData.title
      * @param {number} jokeData.likes
      * @param {boolean} jokeData.likedByUser
