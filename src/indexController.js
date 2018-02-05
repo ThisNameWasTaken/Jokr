@@ -23,7 +23,11 @@ export default class IndexController {
             return Promise.resolve();
         }
 
-        return idb.open('jokr', 1, upgradeDb => upgradeDb.createObjectStore('jokes', { keyPath: 'id' }));
+        return idb.open('jokr', 1, upgradeDb => {
+            upgradeDb.createObjectStore('jokes', { keyPath: 'id' });
+            let jokeStore = upgradeDb.transaction.objectStore('jokes');
+            jokeStore.createIndex('dateTime', 'dateTime');
+        });
     }
 
     _registerServiceWorker() {
@@ -91,7 +95,8 @@ export default class IndexController {
                         id: response.id,
                         text: response.value,
                         likes: Math.floor(Math.random() * 999),
-                        likedByUser: false
+                        likedByUser: Math.round(Math.random()) ? true : false,
+                        dateTime: new Date().toISOString()
                     }
                     this._idb.then(db => db.transaction('jokes', 'readwrite').objectStore('jokes').put(jokeData));
                     resolve(jokeData);
@@ -104,6 +109,8 @@ export default class IndexController {
      * @param {number} numOfJokes - the number of jokes which must be fetched (10 by default)
      */
     _fetchJokesFromNetwork(numOfJokes = 10) {
+        this._cleanCache();
+
         for (let i = 0; i < numOfJokes; i++) {
             this._fetchJoke().then(jokeData => this._jokeView.addJoke(jokeData));
         }
@@ -128,17 +135,45 @@ export default class IndexController {
      * otherwise it rejects
      */
     _showCachedJokes() {
-        return this._idb.then(db => db.transaction('jokes').objectStore('jokes').getAll())
+        return this._idb.then(db => db.transaction('jokes').objectStore('jokes').index('dateTime').getAll())
             .then(jokes => {
-                for (const joke of jokes) {
-                    this._jokeView.addJoke(joke);
+                if (!jokes.length) {
+                    return Promise.reject();
                 }
 
-                if (!jokes.length || jokes.length < 10) {
+                // TODO: use a cursor instead because when database gets bigger getAll() might be significantly slower
+                // show the last 10 jokes from the cache
+                // if there are not 10 jokes in the cache then show whatever amount there is in the cache
+                const start = (jokes.length - 10) > 0 ? (jokes.length - 10) : 0;
+                for (let i = start; i < jokes.length; i++) {
+                    this._jokeView.addJoke(jokes[i]);
+                }
+
+                if (jokes.length < 10) {
                     return Promise.reject();
                 }
 
                 return Promise.resolve();
             });
+    }
+
+    /**
+     * @private deletes all jokes, which are not liked by the user, from the databse
+     * <p>NOTE: call this function before fetching jokes from the network since if they have not been liked by the user
+     * they will be deleted aswell</p>
+     */
+    _cleanCache() {
+        this._idb.then(db => db.transaction('jokes', 'readwrite').objectStore('jokes').index('dateTime').openCursor()
+            .then(function logJoke(cursor) {
+                if (!cursor) {
+                    return;
+                }
+
+                if (!cursor.value.likedByUser) {
+                    cursor.delete();
+                }
+
+                return cursor.continue().then(logJoke);
+            }));
     }
 }
