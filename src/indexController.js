@@ -9,10 +9,15 @@ export default class IndexController {
 
         this._registerServiceWorker();
         this._idb = this._openDatabase();
-        this._fetchJokesFromNetwork();
+        this._showCachedJokes()
+            // if the jokes from the cache are not enough, fetch some more from the network
+            .catch(() => this._fetchJokesFromNetwork());
         this._fetchJokesOnScrollBottom();
     }
 
+    /**
+     * @private returns a promise for the database
+     */
     _openDatabase() {
         if (!navigator.serviceWorker) {
             return Promise.resolve();
@@ -116,5 +121,24 @@ export default class IndexController {
                 this._fetchJokesFromNetwork(numOfJokes);
             }
         });
+    }
+
+    /**
+     * @private returns a promise which resolves if at least 10 jokes were gathered from the database,
+     * otherwise it rejects
+     */
+    _showCachedJokes() {
+        return this._idb.then(db => db.transaction('jokes').objectStore('jokes').getAll())
+            .then(jokes => {
+                for (const joke of jokes) {
+                    this._jokeView.addJoke(joke);
+                }
+
+                if (!jokes.length || jokes.length < 10) {
+                    return Promise.reject();
+                }
+
+                return Promise.resolve();
+            });
     }
 }
