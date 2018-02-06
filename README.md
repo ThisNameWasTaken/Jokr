@@ -6,6 +6,6 @@ Run ```npm run dev-server```
 
 ## How do I build?
 Run ```npm run build```
-###Notes: 
+### Notes: 
 There is no sass loader inside the webpack config.
 Watch mode is enabled.
