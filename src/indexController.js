@@ -2,10 +2,14 @@ import JokeView from './jokeView/jokeView';
 import snackbarView from './snackbarView/snackbarView';
 import idb from './idb';
 
+const MAX_CACHED_JOKES = 10;
+
 export default class IndexController {
     constructor(container) {
         this._container = container;
         this._jokeView = new JokeView(container);
+        this._reachedBottom = false;
+        this._cachedJokesNum = 0;
 
         this._registerServiceWorker();
         this._idb = this._openDatabase();
@@ -99,6 +103,15 @@ export default class IndexController {
                         dateTime: new Date().toISOString()
                     }
                     this._idb.then(db => db.transaction('jokes', 'readwrite').objectStore('jokes').put(jokeData));
+
+                    // call the cleanCache method when too many jokes were cached
+                    if (this._cachedJokesNum < MAX_CACHED_JOKES) {
+                        this._cachedJokesNum++;
+                    } else {
+                        this._cachedJokesNum = 0;
+                        this._cleanCache();
+                    }
+
                     resolve(jokeData);
                 })
         );
@@ -109,8 +122,6 @@ export default class IndexController {
      * @param {number} numOfJokes - the number of jokes which must be fetched (10 by default)
      */
     _fetchJokesFromNetwork(numOfJokes = 10) {
-        this._cleanCache();
-
         for (let i = 0; i < numOfJokes; i++) {
             this._fetchJoke().then(jokeData => this._jokeView.addJoke(jokeData));
         }
@@ -124,8 +135,14 @@ export default class IndexController {
     _fetchJokesOnScrollBottom(numOfJokes = 10) {
         const layoutContent = document.getElementsByClassName('mdl-layout__content')[0];
         layoutContent.addEventListener('scroll', () => {
-            if (layoutContent.scrollTop + layoutContent.clientHeight >= layoutContent.scrollHeight) {
-                this._fetchJokesFromNetwork(numOfJokes);
+            // that 8 is just an offset so the "bottom" doesn't have to be the end of the document
+            if (layoutContent.scrollTop + layoutContent.clientHeight >= layoutContent.scrollHeight - 8) {
+                if (!this._reachedBottom) {
+                    this._reachedBottom = true;
+                    this._fetchJokesFromNetwork(numOfJokes);
+                }
+            } else {
+                this._reachedBottom = false;
             }
         });
     }
@@ -144,12 +161,12 @@ export default class IndexController {
                 // TODO: use a cursor instead because when database gets bigger getAll() might be significantly slower
                 // show the last 10 jokes from the cache
                 // if there are not 10 jokes in the cache then show whatever amount there is in the cache
-                const start = (jokes.length - 10) > 0 ? (jokes.length - 10) : 0;
+                const start = (jokes.length - MAX_CACHED_JOKES) > 0 ? (jokes.length - MAX_CACHED_JOKES) : 0;
                 for (let i = start; i < jokes.length; i++) {
                     this._jokeView.addJoke(jokes[i]);
                 }
 
-                if (jokes.length < 10) {
+                if (jokes.length < MAX_CACHED_JOKES) {
                     return Promise.reject();
                 }
 
@@ -159,11 +176,16 @@ export default class IndexController {
 
     /**
      * @private deletes all jokes, which are not liked by the user, from the databse
-     * <p>NOTE: call this function before fetching jokes from the network since if they have not been liked by the user
-     * they will be deleted aswell</p>
      */
     _cleanCache() {
         this._idb.then(db => db.transaction('jokes', 'readwrite').objectStore('jokes').index('dateTime').openCursor()
+            .then(function (cursor) {
+                if (!cursor) {
+                    return;
+                }
+
+                return cursor.advance(MAX_CACHED_JOKES); // Always keep the least MIN_CACHE_ENTRIES entries inside the database
+            })
             .then(function logJoke(cursor) {
                 if (!cursor) {
                     return;
