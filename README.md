@@ -10,3 +10,5 @@ Run ```npm run build```
 ### Notes: 
   - There is no sass loader inside the webpack config 
   - Watch mode is enabled.
+
+If you want see a live demo of this pwa visit https://thisnamewastaken.github.io/Jokr/
