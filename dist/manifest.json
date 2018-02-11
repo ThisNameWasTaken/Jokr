@@ -28,7 +28,7 @@
             "type": "image/png"
         }
     ],
-    "start_url": "/ThisNameWasTaken/Jokr/tree/master/dist/index.html",
+    "start_url": "/Jokr/dist/index.html",
     "display": "browser",
     "theme_color": "#303f9f",
     "background_color": "#3f51b5"
