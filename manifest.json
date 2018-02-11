@@ -23,6 +23,7 @@
             "type": "image/png"
         }
     ],
-    "start_url": "/index.html",
-    "display": "standalone"
+    "start_url": "https://github.com/ThisNameWasTaken/Jokr/tree/master/dist/index.html",
+    "display": "browser",
+    "theme_color": "#2196F3"
 }
