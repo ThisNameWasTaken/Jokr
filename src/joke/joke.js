@@ -31,6 +31,7 @@ export default class Joke {
         this._hiddenCopyInput.value = this.text;
         this._hiddenCopyInput.select();
         document.execCommand("copy");
+        this._hiddenCopyInput.blur();
 
         snackbarView.showSnackbar({ message: 'Joke copied to clipboard.' });
     }
