@@ -9,6 +9,7 @@ export default class IndexController {
         this._container = container;
         this._jokeView = new JokeView(container);
         this._reachedBottom = false;
+        this._isFetchingJokes = false;
         this._cachedJokesNum = 0;
 
         this._registerServiceWorker();
@@ -106,8 +107,10 @@ export default class IndexController {
 
                     // call the cleanCache method when too many jokes were cached
                     if (this._cachedJokesNum < MAX_CACHED_JOKES) {
+                        this._isFetchingJokes = true;
                         this._cachedJokesNum++;
                     } else {
+                        this._isFetchingJokes = false;
                         this._cachedJokesNum = 0;
                         this._cleanCache();
                     }
@@ -135,6 +138,12 @@ export default class IndexController {
     _fetchJokesOnScrollBottom(numOfJokes = 10) {
         const layoutContent = document.getElementsByClassName('mdl-layout__content')[0];
         layoutContent.addEventListener('scroll', () => {
+            // if the scroll event has already been triggered 
+            // and jokes are still being fetched from the network reurn
+            if (!this._isFetchingJokes) {
+                return;
+            }
+
             // that 8 is just an offset so the "bottom" doesn't have to be the end of the document
             if (layoutContent.scrollTop + layoutContent.clientHeight >= layoutContent.scrollHeight - 8) {
                 if (!this._reachedBottom) {
