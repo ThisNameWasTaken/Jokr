@@ -48,6 +48,7 @@ export default class Joke {
         this._hiddenCopyInput = document.createElement('input');
         this._hiddenCopyInput.type = "text";
         this._hiddenCopyInput.id = HIDDEN_INPUT_ID;
+        this._hiddenCopyInput.setAttribute("aria-hidden", "true");
         document.body.appendChild(this._hiddenCopyInput);
     }
 }
