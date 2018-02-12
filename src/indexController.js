@@ -108,10 +108,9 @@ export default class IndexController {
 
                     // call the cleanCache method when too many jokes were cached
                     if (this._cachedJokesNum < MAX_CACHED_JOKES) {
-                        this._isFetchingJokes = true;
                         this._cachedJokesNum++;
+                        this._isFetchingJokes = true;
                     } else {
-                        this._isFetchingJokes = false;
                         this._cachedJokesNum = 0;
                         this._cleanCache();
                     }
@@ -141,7 +140,8 @@ export default class IndexController {
         layoutContent.addEventListener('scroll', () => {
             // if the scroll event has already been triggered 
             // and jokes are still being fetched from the network reurn
-            if (!this._isFetchingJokes) {
+            if (this._isFetchingJokes) {
+                this._isFetchingJokes = (this._cachedJokesNum < 10);
                 return;
             }
 
