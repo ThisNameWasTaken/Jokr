@@ -1,6 +1,7 @@
 import JokeView from './jokeView/jokeView';
 import snackbarView from './snackbarView/snackbarView';
 import idb from './idb';
+import supportsPassive from './supportsPassive/supportsPassive';
 
 const MAX_CACHED_JOKES = 10;
 
@@ -153,7 +154,7 @@ export default class IndexController {
             } else {
                 this._reachedBottom = false;
             }
-        });
+        }, supportsPassive ? { passive: true } : false);
     }
 
     /**
