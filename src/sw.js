@@ -1,12 +1,12 @@
 self.addEventListener('install', event => event.waitUntil(
     caches.open('jokr-static-v1')
         .then(cache => cache.addAll([
-            '/',
-            'main.min.css',
-            'jokr.bundle.min.js',
-            'images/buffer.svg',
-            'images/tick-mask.svg',
-            'images/tick.svg',
+            '/Jokr/',
+            '/Jokr/main.min.css',
+            '/Jokr/jokr.bundle.min.js',
+            '/Jokr/images/buffer.svg',
+            '/Jokr/images/tick-mask.svg',
+            '/Jokr/images/tick.svg',
             'https://fonts.googleapis.com/icon?family=Material+Icons',
             'https://fonts.googleapis.com/css?family=Roboto:300,400,500,700'
         ]))

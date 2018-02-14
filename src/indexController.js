@@ -41,7 +41,7 @@ export default class IndexController {
             return;
         }
 
-        navigator.serviceWorker.register('/sw.js').then(reg => {
+        navigator.serviceWorker.register('/Jokr/sw.js').then(reg => {
             if (!navigator.serviceWorker.controller) {
                 return;
             }
