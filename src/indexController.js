@@ -107,12 +107,10 @@ export default class IndexController {
                     this._idb.then(db => db.transaction('jokes', 'readwrite').objectStore('jokes').put(jokeData));
 
                     // call the cleanCache method when too many jokes were cached
-                    if (this._cachedJokesNum < MAX_CACHED_JOKES) {
+                    if (++this._cachedJokesNum < MAX_CACHED_JOKES) {
                         this._isFetchingJokes = true;
-                        this._cachedJokesNum++;
                     } else {
                         this._isFetchingJokes = false;
-                        this._cachedJokesNum = 0;
                         this._cleanCache();
                     }
 
@@ -140,8 +138,8 @@ export default class IndexController {
         const layoutContent = document.getElementsByClassName('mdl-layout__content')[0];
         layoutContent.addEventListener('scroll', () => {
             // if the scroll event has already been triggered 
-            // and jokes are still being fetched from the network reurn
-            if (!this._isFetchingJokes) {
+            // and jokes are still being fetched from the network return
+            if (this._isFetchingJokes) {
                 return;
             }
 
@@ -194,7 +192,7 @@ export default class IndexController {
                     return;
                 }
 
-                return cursor.advance(MAX_CACHED_JOKES); // Always keep the least MIN_CACHE_ENTRIES entries inside the database
+                return cursor.advance(MAX_CACHED_JOKES); // Always keep the least MAX_CACHED_JOKES entries inside the database
             })
             .then(function logJoke(cursor) {
                 if (!cursor) {
@@ -206,6 +204,7 @@ export default class IndexController {
                 }
 
                 return cursor.continue().then(logJoke);
-            }));
+            }))
+            .then(() => this._cachedJokesNum = 0);
     }
 }
