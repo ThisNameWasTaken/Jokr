@@ -19,6 +19,8 @@ export default class IndexController {
             // if the jokes from the cache are not enough, fetch some more from the network
             .catch(() => this._fetchJokesFromNetwork());
         this._fetchJokesOnScrollBottom();
+
+        self.addEventListener('liketoggle', this._updateDatabaseLikes.bind(this));
     }
 
     /**
@@ -34,6 +36,14 @@ export default class IndexController {
             let jokeStore = upgradeDb.transaction.objectStore('jokes');
             jokeStore.createIndex('dateTime', 'dateTime');
         });
+    }
+
+    /**
+     * @private updates likes inside the idb
+     * @param {CustomEvent} event
+     */
+    _updateDatabaseLikes(event) {
+        this._idb.then(db => db.transaction('jokes', 'readwrite').objectStore('jokes').put(event.detail.jokeData));
     }
 
     _registerServiceWorker() {
@@ -101,7 +111,7 @@ export default class IndexController {
                         id: response.id,
                         text: response.value,
                         likes: Math.floor(Math.random() * 999),
-                        likedByUser: Math.round(Math.random()) ? true : false,
+                        isLikedByUser: false,
                         dateTime: new Date().toISOString()
                     }
                     this._idb.then(db => db.transaction('jokes', 'readwrite').objectStore('jokes').put(jokeData));
@@ -199,7 +209,7 @@ export default class IndexController {
                     return;
                 }
 
-                if (!cursor.value.likedByUser) {
+                if (!cursor.value.isLikedByUser) {
                     cursor.delete();
                 }
 
