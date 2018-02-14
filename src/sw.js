@@ -3,7 +3,7 @@ self.addEventListener('install', event => event.waitUntil(
         .then(cache => cache.addAll([
             '/',
             'main.min.css',
-            'jokr.bundle.min.js',
+            // 'jokr.bundle.min.js',
             'images/buffer.svg',
             'images/tick-mask.svg',
             'images/tick.svg',
