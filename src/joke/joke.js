@@ -10,13 +10,13 @@ export default class Joke {
      * @param {string|number} jokeData.id
      * @param {string} jokeData.title
      * @param {number} jokeData.likes
-     * @param {boolean} jokeData.likedByUser
+     * @param {boolean} jokeData.isLikedByUser
      */
-    constructor(jokeData = { id, text, likes, likedByUser: false }) {
+    constructor(jokeData = { id, text, likes, isLikedByUser: false }) {
         this.id = jokeData.id;
         this.text = jokeData.text;
         this.likes = jokeData.likes;
-        this.likedByUser = jokeData.likedByUser;
+        this.isLikedByUser = jokeData.isLikedByUser;
 
         /** @private we set this input's value to the joke's then copy it */
         this._hiddenCopyInput = document.getElementById(HIDDEN_INPUT_ID);
@@ -37,9 +37,18 @@ export default class Joke {
     }
 
     toggleLike() {
-        // TODO: update the cache and the database
-        this.likedByUser ? this.likes-- : this.likes++;
-        this.likedByUser = !this.likedByUser;
+        this.isLikedByUser ? this.likes-- : this.likes++;
+        this.isLikedByUser = !this.isLikedByUser;
+        self.dispatchEvent(new CustomEvent('liketoggle', {
+            detail: {
+                jokeData: {
+                    id: this.id,
+                    text: this.text,
+                    likes: this.likes,
+                    isLikedByUser: this.isLikedByUser
+                }
+            }
+        }));
     }
 
     /** @private creates an input with an id of HIDDEN_INPUT_ID and adds it to the DOM */

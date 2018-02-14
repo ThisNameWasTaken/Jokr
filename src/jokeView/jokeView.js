@@ -16,9 +16,9 @@ export default class JokeList {
      * @param {string|number} jokeData.id
      * @param {string} jokeData.title
      * @param {number} jokeData.likes
-     * @param {boolean} jokeData.likedByUser
+     * @param {boolean} jokeData.isLikedByUser
      */
-    addJoke(jokeData = { id, text, likes, likedByUser: false }) {
+    addJoke(jokeData = { id, text, likes, isLikedByUser: false }) {
         let joke = new Joke(jokeData);
         // this is what we are creating
         // <div class="mdl-card--joke mdl-card mdl-shadow--2dp">
@@ -75,7 +75,7 @@ export default class JokeList {
         let likeInput = createElement('input', 'mdl-icon-toggle__input');
         likeInput.type = 'checkbox';
         likeInput.id = `joke-${joke.id}`;
-        likeInput.checked = joke.likedByUser;
+        likeInput.checked = joke.isLikedByUser;
         likeInput.addEventListener('click', function () {
             joke.toggleLike();
             jokeLikes.innerHTML = joke.likes;
