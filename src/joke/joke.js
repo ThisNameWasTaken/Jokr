@@ -37,9 +37,18 @@ export default class Joke {
     }
 
     toggleLike() {
-        // TODO: update the cache and the database
         this.isLikedByUser ? this.likes-- : this.likes++;
         this.isLikedByUser = !this.isLikedByUser;
+        self.dispatchEvent(new CustomEvent('liketoggle', {
+            detail: {
+                jokeData: {
+                    id: this.id,
+                    text: this.text,
+                    likes: this.likes,
+                    isLikedByUser: this.isLikedByUser
+                }
+            }
+        }));
     }
 
     /** @private creates an input with an id of HIDDEN_INPUT_ID and adds it to the DOM */
