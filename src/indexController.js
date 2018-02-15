@@ -43,7 +43,13 @@ export default class IndexController {
      * @param {CustomEvent} event
      */
     _updateDatabaseLikes(event) {
-        this._idb.then(db => db.transaction('jokes', 'readwrite').objectStore('jokes').put(event.detail.jokeData));
+        this._idb.then(function (db) {
+            let jokeStore = db.transaction('jokes', 'readwrite').objectStore('jokes');
+            jokeStore.get(event.detail.id).then(jokeData => {
+                jokeData.isLikedByUser = !jokeData.isLikedByUser;
+                jokeStore.put(jokeData);
+            });
+        });
     }
 
     _registerServiceWorker() {
