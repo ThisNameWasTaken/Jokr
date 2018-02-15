@@ -41,12 +41,7 @@ export default class Joke {
         this.isLikedByUser = !this.isLikedByUser;
         self.dispatchEvent(new CustomEvent('liketoggle', {
             detail: {
-                jokeData: {
-                    id: this.id,
-                    text: this.text,
-                    likes: this.likes,
-                    isLikedByUser: this.isLikedByUser
-                }
+                id: this.id
             }
         }));
     }
