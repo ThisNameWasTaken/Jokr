@@ -291,6 +291,11 @@
       return;
     }
 
+    if (event.target == this.obfuscator_ && this.drawer_.classList.contains(this.CssClasses_.IS_DRAWER_OPEN)) {
+      this.isDraggingDrawer = false;
+      return;
+    }
+
     this.drawer_.style.transition = '0s';
     this.obfuscator_.style.transition = '0s';
   };
@@ -303,13 +308,15 @@
    * @private
    */
   MaterialLayout.prototype.moveDrawer_ = function (event) {
+    event.preventDefault();
+
     if (!this.isDraggingDrawer) {
       return;
     }
 
     this.currentX_ = event.touches[0].clientX;
 
-    var x = this.drawer_.classList.contains('is-visible') ?
+    var x = this.drawer_.classList.contains(this.CssClasses_.IS_DRAWER_OPEN) ?
       Math.min(this.currentX_ - this.startX_, 0) :
       Math.min(this.currentX_ - this.startX_ - this.drawerWidth_, 0);
 
@@ -335,9 +342,9 @@
     this.obfuscator_.style.opacity = '';
 
     var offsetX = this.currentX_ - this.startX_;
-    if (this.drawer_.classList.contains(this.CssClasses_.IS_DRAWER_OPEN) && offsetX < -this.drawerWidth_ * .3) {
+    if (this.drawer_.classList.contains(this.CssClasses_.IS_DRAWER_OPEN) && offsetX < -this.drawerWidth_ * .25) {
       this.toggleDrawer();
-    } else if (!this.drawer_.classList.contains(this.CssClasses_.IS_DRAWER_OPEN) && offsetX > this.drawerWidth_ * .3) {
+    } else if (!this.drawer_.classList.contains(this.CssClasses_.IS_DRAWER_OPEN) && offsetX > this.drawerWidth_ * .25) {
       this.toggleDrawer();
     }
   };
