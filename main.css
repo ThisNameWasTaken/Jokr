@@ -3069,6 +3069,7 @@ input.mdl-button[type="submit"] {
   z-index: 4;
   visibility: hidden;
   transition-property: background-color;
+  will-change: opacity;
   transition-duration: 0.2s;
   transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
 }
