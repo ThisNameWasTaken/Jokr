@@ -413,6 +413,7 @@
     z-index: 4;
     visibility: hidden;
     transition-property: background-color;
+    will-change: opacity;
     @include material-animation-default();
 
     &.is-visible {
