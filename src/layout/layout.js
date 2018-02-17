@@ -277,6 +277,86 @@
   MaterialLayout.prototype['toggleDrawer'] =
     MaterialLayout.prototype.toggleDrawer;
 
+
+  /**
+   * Called when the drawer is clicked or touched
+   * 
+   * @private
+   */
+  MaterialLayout.prototype.moveDrawerStart_ = function (event) {
+    this.startX_ = event.touches[0].clientX;
+    this.isDraggingDrawer = this.startX_ <= 24 || this.drawer_.classList.contains(this.CssClasses_.IS_DRAWER_OPEN);
+
+    if (!this.isDraggingDrawer) {
+      return;
+    }
+
+    this.drawer_.style.transition = '0s';
+    this.obfuscator_.style.transition = '0s';
+  };
+  MaterialLayout.prototype['moveDrawerStart_'] =
+    MaterialLayout.prototype.moveDrawerStart_;
+
+  /**
+   * Called when the drawer is dragged
+   * 
+   * @private
+   */
+  MaterialLayout.prototype.moveDrawer_ = function (event) {
+    if (!this.isDraggingDrawer) {
+      return;
+    }
+
+    this.currentX_ = event.touches[0].clientX;
+
+    var x = this.drawer_.classList.contains('is-visible') ?
+      Math.min(this.currentX_ - this.startX_, 0) :
+      Math.min(this.currentX_ - this.startX_ - this.drawerWidth_, 0);
+
+    this.drawer_.style.transform = 'translateX(' + x + 'px)';
+    this.obfuscator_.style.opacity = Math.min(1 + x / this.drawerWidth_, 1);
+  };
+  MaterialLayout.prototype['moveDrawer_'] =
+    MaterialLayout.prototype.moveDrawer_;
+
+  /**
+   * Called when the drawer is no longer dragged
+   * 
+   * @private
+   */
+  MaterialLayout.prototype.moveDrawerEnd_ = function (event) {
+    if (!this.isDraggingDrawer) {
+      return;
+    }
+
+    this.drawer_.style.transition = '';
+    this.drawer_.style.transform = '';
+    this.obfuscator_.style.transition = '';
+    this.obfuscator_.style.opacity = '';
+
+    var offsetX = this.currentX_ - this.startX_;
+    if (this.drawer_.classList.contains(this.CssClasses_.IS_DRAWER_OPEN) && offsetX < -this.drawerWidth_ * .3) {
+      this.toggleDrawer();
+    } else if (!this.drawer_.classList.contains(this.CssClasses_.IS_DRAWER_OPEN) && offsetX > this.drawerWidth_ * .3) {
+      this.toggleDrawer();
+    }
+  };
+  MaterialLayout.prototype['moveDrawerEnd_'] =
+    MaterialLayout.prototype.moveDrawerEnd_;
+
+  /**
+   * Makes the drawer draggable
+   * 
+   * @public
+   */
+  MaterialLayout.prototype.addDragEventListeners = function () {
+    document.addEventListener('touchstart', this.moveDrawerStart_.bind(this));
+    document.addEventListener('touchmove', this.moveDrawer_.bind(this));
+    document.addEventListener('touchend', this.moveDrawerEnd_.bind(this));
+  };
+  MaterialLayout.prototype['addDragEventListeners'] =
+    MaterialLayout.prototype.addDragEventListeners;
+
   /**
    * Initialize element.
    */
@@ -420,6 +500,9 @@
 
         this.drawer_.addEventListener('keydown', this.keyboardEventHandler_.bind(this));
         this.drawer_.setAttribute('aria-hidden', 'true');
+
+        this.drawerWidth_ = this.drawer_.getBoundingClientRect().width;
+        this.addDragEventListeners();
       }
 
       // Keep an eye on screen size, and add/remove auxiliary class for styling
