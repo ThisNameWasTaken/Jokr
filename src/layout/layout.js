@@ -308,6 +308,8 @@
    * @private
    */
   MaterialLayout.prototype.moveDrawer_ = function (event) {
+    event.preventDefault();
+
     if (!this.isDraggingDrawer) {
       return;
     }
@@ -340,9 +342,9 @@
     this.obfuscator_.style.opacity = '';
 
     var offsetX = this.currentX_ - this.startX_;
-    if (this.drawer_.classList.contains(this.CssClasses_.IS_DRAWER_OPEN) && offsetX < -this.drawerWidth_ * .27) {
+    if (this.drawer_.classList.contains(this.CssClasses_.IS_DRAWER_OPEN) && offsetX < -this.drawerWidth_ * .25) {
       this.toggleDrawer();
-    } else if (!this.drawer_.classList.contains(this.CssClasses_.IS_DRAWER_OPEN) && offsetX > this.drawerWidth_ * .27) {
+    } else if (!this.drawer_.classList.contains(this.CssClasses_.IS_DRAWER_OPEN) && offsetX > this.drawerWidth_ * .25) {
       this.toggleDrawer();
     }
   };
